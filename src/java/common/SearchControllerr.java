@@ -147,7 +147,7 @@ public class SearchControllerr extends HttpServlet {
 
     }
 
-    private String getResponse(String type, String key,String filter, String xpage) {
+    private String getResponse(String type, String key, String filter, String xpage) {
         List<?> list = new ArrayList<>();
         List<?> listByPage = new ArrayList<>();
 
@@ -165,7 +165,7 @@ public class SearchControllerr extends HttpServlet {
                 list = searchCorollary(key, filter);
                 break;
         }
-        
+
         //  page => trang cần hiển thị, numberPerpage là số phần tử/trang
         int page, numberPerPage = 10;
         int size; // là kích thước của list dữ liệu, nếu list rỗng set size =0, ngược lại set = số phần tử trong list data
@@ -196,7 +196,7 @@ public class SearchControllerr extends HttpServlet {
 
         switch (type) {
             case "curriculum":
-                return getResponseCurriculum(listByPage, key, type,filter, size, page, numberOfPage, start, startPage, endPage);
+                return getResponseCurriculum(listByPage, key, type, filter, size, page, numberOfPage, start, startPage, endPage);
             case "syllabus":
                 return getResponseSyllabus(listByPage, key, type, size, page, numberOfPage, startPage, endPage);
             case "preRequisite":
@@ -208,7 +208,7 @@ public class SearchControllerr extends HttpServlet {
 
     }
 
-    private String getResponseCurriculum(List<?> list, String key, String type,String filter, int size, int page, int numberOfPage, int start, int startPage, int endPage) {
+    private String getResponseCurriculum(List<?> list, String key, String type, String filter, int size, int page, int numberOfPage, int start, int startPage, int endPage) {
         String response = "";
         if (list.isEmpty()) {
             response += "<div class='row'><h5 class='text-center' style='color: red; margin-top: 2rem; margin-bottom: 2rem;'>Data Not Found</h3></div>";
@@ -232,7 +232,7 @@ public class SearchControllerr extends HttpServlet {
                         + "     <td style=\" \">" + ((Curriculum) list.get(i)).getCurCode() + "</td>"
                         + "     <td style=\" \"><a href='curriculumDetails?curid=" + ((Curriculum) list.get(i)).getCurid() + "'>"
                         + "             <p style=\"font-size: 18px; font-weight: 500; color: #ff6634\" class=\"product-name\">" + ((Curriculum) list.get(i)).getCurName_EN() + "</p>"
-                        + "             <small class=\"cart_ref \">" + ((Curriculum) list.get(i)).getCurName_VI() + "</small>"   
+                        + "             <small class=\"cart_ref \">" + ((Curriculum) list.get(i)).getCurName_VI() + "</small>"
                         + "         </a>"
                         + "     </td>"
                         + "     <td class='descripCur'>" + ((Curriculum) list.get(i)).getDescription() + "</td>"
@@ -246,11 +246,11 @@ public class SearchControllerr extends HttpServlet {
                     + "                            <li class='page-item " + (page == 1 ? "disabled" : "waves-effect") + "'>\n"
                     + "                                <a onclick=\"changePage('" + (page - 1) + "')\" class=\"page-link\" style=\"cursor: pointer; \"><span aria-hidden=\"true\">&laquo;</span></a>\n"
                     + "                            </li>\n";
-            
+
             if (startPage > 1) {
                 response += "<li class='waves-effect'><a style=\"cursor: pointer; \" onclick=\"changePage('" + (page - 1) + "') \">...</a></li>\n";
             }
-            
+
             for (int i = startPage; i <= endPage; i++) {
                 response += "<li class='page-item " + (page == i ? "active" : "waves-effect") + "'>\n"
                         + "     <a style=\"cursor: pointer; \" class=\"page-link\" onclick=\"changePage('" + (i) + "')\">" + i + "<span class=\"sr-only\">(current)</span></a>\n"
@@ -283,21 +283,41 @@ public class SearchControllerr extends HttpServlet {
                     + "<th style=\"   vertical-align: middle;\">Subject Name</th>"
                     + "<th style=\"   vertical-align: middle;\">Syllabus Name</th>"
                     + "<th style=\"   vertical-align: middle;\">IsActive</th>"
-                    + "<th style=\"   vertical-align: middle;\">IsApproved</th"
+                    + "<th style=\"   vertical-align: middle;\">IsApproved</th>"
+                    + " <th style=\"vertical-align: middle;\">DecisionNo MM/dd/yyyy</th>"
                     + "</tr></thead>"
                     + "<tbody>\n";
+            
             for (int i = 0; i < list.size(); i++) {
-                response += "<tr>"
-                        + "<td style=\" \">" + ((Syllabus) list.get(i)).getSlbid() + "</td>"
-                        + "<td style=\" \">" + ((Syllabus) list.get(i)).getSubjectCode() + "</td>"
-                        + "<td style=\"  \">" + new DAO().getSubjectNameENBySubjectCode(((Syllabus) list.get(i)).getSubjectCode()) + "</td>"
-                        + "<td style=\"  \"><a href='syllabusDetails?subjectCode=" + ((Syllabus) list.get(i)).getSubjectCode() + "&slbid=" + ((Syllabus) list.get(i)).getSlbid() + "'>"
+                response += "<tr>";
+                response += "<td style=\" \">" + ((Syllabus) list.get(i)).getSlbid() + "</td>";
+                if (((Syllabus) list.get(i)).getSubjectCode() == null) {
+                    response += "<td style=\" \">" + "" + "</td>";
+                    response += "<td style=\"  \">" + "" + "</td>";
+                } else {
+                    response += "<td style=\" \">" + ((Syllabus) list.get(i)).getSubjectCode() + "</td>";
+                    response += "<td style=\"  \">" + new DAO().getSubjectNameENBySubjectCode(((Syllabus) list.get(i)).getSubjectCode()) + "</td>";
+                }
+                response
+                        += "<td style=\"  \"><a href='syllabusDetails?subjectCode=" + ((Syllabus) list.get(i)).getSubjectCode() + "&slbid=" + ((Syllabus) list.get(i)).getSlbid() + "'>"
                         + "     <p style=\"font-size: 18px; font-weight: 500; color: #ff6634\" class=\"product-name\">" + ((Syllabus) list.get(i)).getSlbName_EN() + "</p>\n"
                         + "     <small class='cart_ref'>" + ((Syllabus) list.get(i)).getSlbName_VI() + "</small>"
                         + "     </a>"
                         + "</td>"
                         + "<td class='text-center' style=\"  \"><i class='fa " + (((Syllabus) list.get(i)).isIsActive() ? "fa-check text-success" : "fa-times text-danger") + "'></i></td>"
                         + "<td class='text-center' style=\"  \"><i class='fa " + (((Syllabus) list.get(i)).isIsApproved() ? "fa-check text-success" : "fa-times text-danger") + "'></i></td>"
+                        + "<td>\n";
+                if (((Syllabus) list.get(i)).getDecision() == null) {
+                    response += "<a href=\"decision?decisionNo=" + "null" + "\" >\n";
+                    response += "<span class=\"list-enq-name\">" + "null" + "</span>\n";
+                } else {
+                    response += "<a href=\"decision?decisionNo=" + ((Syllabus) list.get(i)).getDecision().getDecisionNo() + "\" >\n";
+                    response += "<span class=\"list-enq-name\">" + ((Syllabus) list.get(i)).getDecision().getDecisionNo() + "</span>\n";
+                }
+                response
+                        += "\n"
+                        + "                                        </a>\n"
+                        + "                                    </td>"
                         + "</tr>";
             }
 
@@ -352,8 +372,8 @@ public class SearchControllerr extends HttpServlet {
                         + "     <td style=\" text-align: center;\">" + ((Syllabus) list.get(i)).getSlbid() + "</td>"
                         + "     <td style=\" text-align: center;\">" + ((Syllabus) list.get(i)).getSubjectCode() + "</td>"
                         + "     <td style=\"text-align: center; \">"
-                         + "             <p style=\"font-size: 18px; font-weight: 500; color: #ff6634\" class=\"product-name\">" + ((Syllabus) list.get(i)).getSlbName_EN() + "</p>"
-                        + "             <small class=\"cart_ref\">" + ((Syllabus) list.get(i)).getSlbName_VI() + "</small>"  
+                        + "             <p style=\"font-size: 18px; font-weight: 500; color: #ff6634\" class=\"product-name\">" + ((Syllabus) list.get(i)).getSlbName_EN() + "</p>"
+                        + "             <small class=\"cart_ref\">" + ((Syllabus) list.get(i)).getSlbName_VI() + "</small>"
                         + "     </td>" + getPreRequisite(list, ((Syllabus) list.get(i)).getSubjectCode()) + ""
                         + "</tr>";
             }
@@ -406,15 +426,15 @@ public class SearchControllerr extends HttpServlet {
 //                result.add(item);
 //            }
 
-            if(filter.toLowerCase().contains("curcode")){
-                if (item.getCurCode().toLowerCase().contains(key.toLowerCase())){
+            if (filter.toLowerCase().contains("curcode")) {
+                if (item.getCurCode().toLowerCase().contains(key.toLowerCase())) {
                     result.add(item);
                 }
             }
-            
-            if(filter.toLowerCase().contains("curname")){
+
+            if (filter.toLowerCase().contains("curname")) {
                 if (item.getCurName_EN().toLowerCase().contains(key.toLowerCase())
-                   || item.getCurName_VI().toLowerCase().contains(key.toLowerCase())){
+                        || item.getCurName_VI().toLowerCase().contains(key.toLowerCase())) {
                     result.add(item);
                 }
             }
@@ -430,22 +450,22 @@ public class SearchControllerr extends HttpServlet {
 //                    || item.getSlbName_VI().toLowerCase().contains(key.toLowerCase())) {
 //                result.add(item);
 //            }
-            
-            if(filter.toLowerCase().contains("subjectcode")){
-                if (item.getSubjectCode()==null){
+
+            if (filter.toLowerCase().contains("subjectcode")) {
+                if (item.getSubjectCode() == null) {
                     result.add(item);
-                }else if (item.getSubjectCode().toLowerCase().contains(key.toLowerCase())){
+                } else if (item.getSubjectCode().toLowerCase().contains(key.toLowerCase())) {
                     result.add(item);
                 }
             }
-            
-            if(filter.toLowerCase().contains("syllabusname")){
+
+            if (filter.toLowerCase().contains("syllabusname")) {
                 if (item.getSlbName_EN().toLowerCase().contains(key.toLowerCase())
-                    || item.getSlbName_VI().toLowerCase().contains(key.toLowerCase())){
+                        || item.getSlbName_VI().toLowerCase().contains(key.toLowerCase())) {
                     result.add(item);
                 }
             }
-            
+
         }
         return result;
     }
@@ -458,16 +478,16 @@ public class SearchControllerr extends HttpServlet {
 //                    || item.getSlbName_VI().toLowerCase().equalsIgnoreCase(key.toLowerCase())) {
 //                result.add(item);
 //            }
-            
-            if(filter.toLowerCase().contains("subjectname")){
-                if (item.getSubjectCode().toLowerCase().contains(key.toLowerCase())){
+
+            if (filter.toLowerCase().contains("subjectname")) {
+                if (item.getSubjectCode().toLowerCase().contains(key.toLowerCase())) {
                     result.add(item);
                 }
             }
-            
-            if(filter.toLowerCase().contains("syllabusname")){
+
+            if (filter.toLowerCase().contains("syllabusname")) {
                 if (item.getSlbName_EN().toLowerCase().contains(key.toLowerCase())
-                    || item.getSlbName_VI().toLowerCase().contains(key.toLowerCase())){
+                        || item.getSlbName_VI().toLowerCase().contains(key.toLowerCase())) {
                     result.add(item);
                 }
             }
@@ -475,7 +495,7 @@ public class SearchControllerr extends HttpServlet {
         return result;
     }
 
-    private List<Syllabus> searchCorollary(String key,String filter) {
+    private List<Syllabus> searchCorollary(String key, String filter) {
         List<Syllabus> result = new ArrayList<>();
         for (Syllabus item : listSyllabus) {
 //            if (item.getSubjectCode().toLowerCase().equalsIgnoreCase(key.toLowerCase())
@@ -483,16 +503,16 @@ public class SearchControllerr extends HttpServlet {
 //                    || item.getSlbName_VI().toLowerCase().equalsIgnoreCase(key.toLowerCase())) {
 //                result.add(item);
 //            }
-            
-            if(filter.toLowerCase().contains("subjectcode")){
-                if (item.getSubjectCode().toLowerCase().contains(key.toLowerCase())){
+
+            if (filter.toLowerCase().contains("subjectcode")) {
+                if (item.getSubjectCode().toLowerCase().contains(key.toLowerCase())) {
                     result.add(item);
                 }
             }
-            
-            if(filter.toLowerCase().contains("syllabusname")){
+
+            if (filter.toLowerCase().contains("syllabusname")) {
                 if (item.getSlbName_EN().toLowerCase().contains(key.toLowerCase())
-                    || item.getSlbName_VI().toLowerCase().contains(key.toLowerCase())){
+                        || item.getSlbName_VI().toLowerCase().contains(key.toLowerCase())) {
                     result.add(item);
                 }
             }

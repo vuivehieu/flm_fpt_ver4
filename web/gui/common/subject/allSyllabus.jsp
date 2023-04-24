@@ -149,7 +149,6 @@
                                     <td>
                                         <a href="decision?decisionNo=${item.decision.decisionNo}" >
                                             <span class="list-enq-name">${item.decision.decisionNo}</span>
-                                            <span class="list-enq-city">${custom.getDateFormat('MM/dd/yyyy', item.decision.approvedDate)}</span>
 
                                         </a>
                                     </td>
