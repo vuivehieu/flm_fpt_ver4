@@ -6,6 +6,7 @@
 package admin.user;
 
 import DAL.AccountDAO;
+import DAL.RoleDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,7 +17,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import model.Account;
 import model.Role;
@@ -66,6 +69,11 @@ public class AdminAddUserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        
+        RoleDAO roleDAO = new RoleDAO();
+        List<Role> roleList = roleDAO.getAllRole();
+        request.setAttribute("roles", roleList);
+        
         request.getRequestDispatcher("gui/admin/user/add.jsp").forward(request, response);
     } 
 

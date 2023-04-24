@@ -1,7 +1,6 @@
 package model;
 
 import java.sql.Date;
-import java.util.List;
 import java.util.Set;
 
 public class Account {
@@ -15,13 +14,14 @@ public class Account {
     private boolean isBlock;
     private int status;
     private Date createDate;
+    private String mobile;
 //    private Role role;
     private Set<Role> roles;
 
     public Account() {
     }
 
-    public Account(int accountID, String userName, String password, String displayName, String email, String avatar, boolean isBlock, int status, Date createDate, Set<Role> roles) {
+    public Account(int accountID, String userName, String password, String displayName, String email, String avatar, boolean isBlock, int status, Date createDate, String mobile, Set<Role> roles) {
         this.accountID = accountID;
         this.userName = userName;
         this.password = password;
@@ -31,6 +31,7 @@ public class Account {
         this.isBlock = isBlock;
         this.status = status;
         this.createDate = createDate;
+        this.mobile = mobile;
         this.roles = roles;
     }
 
@@ -106,6 +107,14 @@ public class Account {
         this.createDate = createDate;
     }
 
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
     public Set<Role> getRoles() {
         return roles;
     }
@@ -115,7 +124,4 @@ public class Account {
     }
 
     
-
-    
-
 }

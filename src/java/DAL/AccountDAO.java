@@ -9,9 +9,6 @@ import java.util.List;
 import java.util.Set;
 import model.Account;
 import model.Role;
-import model.Student;
-import model.Curriculum;
-import model.Lecturer;
 import model.PaginationModel;
 
 public class AccountDAO extends DBContext {
@@ -96,7 +93,7 @@ public class AccountDAO extends DBContext {
                 roles = this.getRoleByAccountID(accountId);
                 account = new Account(rs.getInt("accountID"), rs.getString("userName"), rs.getString("password"),
                                             rs.getString("displayName"), rs.getString("email"), rs.getString("avatar"), rs.getBoolean("isBlock"),
-                                            rs.getInt("status"), rs.getDate("createDate"), roles);
+                                            rs.getInt("status"), rs.getDate("createDate"),rs.getString("mobile"), roles);
                 return account;
             }
         } catch (SQLException e) {
@@ -150,7 +147,7 @@ public class AccountDAO extends DBContext {
 //                }
                 account = new Account(rs.getInt("accountID"), rs.getString("userName"), rs.getString("password"),
                                             rs.getString("displayName"), rs.getString("email"), rs.getString("avatar"), rs.getBoolean("isBlock"),
-                                            rs.getInt("status"), rs.getDate("createDate"), roles);
+                                            rs.getInt("status"), rs.getDate("createDate"),rs.getString("mobile"), roles);
 
                 accounts.add(account);
             }
@@ -192,7 +189,7 @@ public class AccountDAO extends DBContext {
         Set<Role> roles = new HashSet<Role>();
         try {
             
-            String sql = "select ac.accountID, ac.userName, ac.password, ac.displayName, ac.email, ac.avatar, ac.isBlock, ac.status, ac.createDate,r.rid, r.rname \n" +
+            String sql = "select ac.accountID, ac.userName, ac.password, ac.displayName, ac.email, ac.avatar, ac.isBlock, ac.status, ac.createDate,ac.mobile, r.rid, r.rname \n" +
                             "from account as ac\n" +
                             "inner join account_role ar on ac.accountID = ar.account_id\n" +
                             "inner join role as r ON ar.role_id = r.rid WHERE ac.status !=4 ";
@@ -241,7 +238,7 @@ public class AccountDAO extends DBContext {
                 
                 account = new Account(rs.getInt("accountID"), rs.getString("userName"), rs.getString("password"),
                         rs.getString("displayName"), rs.getString("email"), rs.getString("avatar"), rs.getBoolean("isBlock"),
-                        rs.getInt("status"), rs.getDate("createDate"), roles);
+                        rs.getInt("status"), rs.getDate("createDate"),rs.getString("mobile"), roles);
 
 
                 list.add(account);
@@ -261,7 +258,7 @@ public class AccountDAO extends DBContext {
         try {
             String sql = "SELECT COUNT(*) AS count\n" +
                         "FROM (\n" +
-                        "		select ac.accountID, ac.userName, ac.password, ac.displayName, ac.email, ac.avatar, ac.isBlock, ac.status, ac.createDate, r.rid, r.rname\n" +
+                        "		select ac.accountID, ac.userName, ac.password, ac.displayName, ac.email, ac.avatar, ac.isBlock, ac.status, ac.createDate,ac.mobile, r.rid, r.rname\n" +
                         "		from account as ac\n" +
                         "		inner join account_role ar on ac.accountID = ar.account_id\n" +
                         "		inner join role as r ON ar.role_id = r.rid WHERE ac.status !=4 ";
@@ -390,7 +387,7 @@ public class AccountDAO extends DBContext {
                 roles = this.getRoleByAccountID(accountId);
                 account = new Account(rs.getInt("accountID"), rs.getString("userName"), rs.getString("password"),
                                             rs.getString("displayName"), rs.getString("email"), rs.getString("avatar"), rs.getBoolean("isBlock"),
-                                            rs.getInt("status"), rs.getDate("createDate"), roles);
+                                            rs.getInt("status"), rs.getDate("createDate"),rs.getString("mobile"), roles);
                 return account;
             }
         } catch (SQLException e) {
@@ -477,7 +474,7 @@ public class AccountDAO extends DBContext {
                 roles = this.getRoleByAccountID(accountId);
                 account = new Account(rs.getInt("accountID"), rs.getString("userName"), rs.getString("password"),
                                             rs.getString("displayName"), rs.getString("email"), rs.getString("avatar"), rs.getBoolean("isBlock"),
-                                            rs.getInt("status"), rs.getDate("createDate"), roles);
+                                            rs.getInt("status"), rs.getDate("createDate"),rs.getString("mobile"), roles);
                 return account;
             }
         } catch (SQLException e) {
@@ -624,7 +621,7 @@ public class AccountDAO extends DBContext {
                 roles = this.getRoleByAccountID(accountId);
                 account = new Account(rs.getInt("accountID"), rs.getString("userName"), rs.getString("password"),
                                             rs.getString("displayName"), rs.getString("email"), rs.getString("avatar"), rs.getBoolean("isBlock"),
-                                            rs.getInt("status"), rs.getDate("createDate"), roles);
+                                            rs.getInt("status"), rs.getDate("createDate"),rs.getString("mobile"), roles);
                 return account;
             }
 

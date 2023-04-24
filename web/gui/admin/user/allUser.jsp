@@ -87,16 +87,18 @@
                                 </div>
                                 
                                 
-                                
-                                
-                                
-                                
-                                
                                 <!--end filter-->
-                                <div class="card-header" style="background: #242939 ;display: flex;justify-content: space-between;">
+<!--                                <div class="card-header" style="background: #242939 ;display: flex;justify-content: space-between;">
                                     <h2 class="p-1 m-0 text-16 font-weight-semi " style="color: white">User Management</h2>
                                     <div style="color: white" class="p-1 m-0 text-16">
                                         <i class="fa fa-plus" aria-hidden="true" data-toggle="modal" data-target="#ModalAdd" style="cursor: pointer"></i>
+                                    </div>
+                                </div>-->
+
+                                <div class="card-header" style="background: #242939 ;display: flex;justify-content: space-between;">
+                                    <h2 class="p-1 m-0 text-16 font-weight-semi " style="color: white">User Management</h2>
+                                    <div style="color: white" class="p-1 m-0 text-16">
+                                        <a href="/SWP391-BL5-G6/admin-adduser"><i class="fa fa-plus" aria-hidden="true" style="cursor: pointer"></i></a>
                                     </div>
                                 </div>
                                 <!--card table-->
@@ -109,6 +111,7 @@
                                                     <th class="sort-handler cursor-pointer">Name</th>
                                                     <th class="sort-handler cursor-pointer">UserName</th>
                                                     <th class="sort-handler cursor-pointer">Email</th>
+                                                    <th class="sort-handler cursor-pointer">Mobile</th>
                                                     <th class="sort-handler cursor-pointer">Role</th>
                                                     <th >Status</th>
                                                     <th></th>
@@ -123,6 +126,7 @@
                                                         </td>
                                                         <td>${user.userName}</td>
                                                         <td>${user.email}</td>
+                                                        <td>${user.mobile}</td>
                                                         <td>
                                                             <select class="custom-select" size="${user.roles.size()}">
                                                                 <c:forEach items="${user.roles}" var="role">
@@ -208,8 +212,8 @@
                                 </div>
                                 
                                 
-                                <!--modal add-->
-                                <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <!--modal add-->
+                        <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">

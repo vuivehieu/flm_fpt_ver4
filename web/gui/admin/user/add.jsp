@@ -1,348 +1,167 @@
-<%-- 
-    Document   : add
-    Created on : 21-01-2023, 15:45:16
-    Author     : phanh
---%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-
-
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c"      uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head>
-        <title>EEducation Master Template</title>
-        <!-- META TAGS -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="EEducation master is one of the best eEducational html template, it's suitable for all eEducation websites like university,college,school,online eEducation,tution center,distance eEducation,computer eEducation">
-        <meta name="keyword" content="eEducation html template, university template, college template, school template, online eEducation template, tution center template">
-        <!-- FAV ICON(BROWSER TAB ICON) -->
-        <link rel="shortcut icon" href="images/fav.ico" type="image/x-icon">
-        <!-- GOOGLE FONT -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7CJosefin+Sans:600,700" rel="stylesheet">
-        <!-- FONTAWESOME ICONS -->
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <!-- ALL CSS FILES -->
-        <link href="css/materialize.css" rel="stylesheet">
-        <link href="css/bootstrap.css" rel="stylesheet" />
-        <link href="css/style.css" rel="stylesheet" />
-        <!-- RESPONSIVE.CSS ONLY FOR MOBILE AND TABLET VIEWS -->
-        <link href="css/style-mob.css" rel="stylesheet" />
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="js/html5shiv.js"></script>
-            <script src="js/respond.min.js"></script>
-            <![endif]-->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
+        <link rel="stylesheet" href="admin-template/css/vendors.bundle.min.css" />
+        <link rel="stylesheet" href="admin-template/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css" />
+        <link rel="stylesheet" href="admin-template/css/main.bundle.min.css"/>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer="defer"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+            <title>User Management</title>
+
     </head>
 
     <body>
-        <!--== MAIN CONTRAINER ==-->
-        <jsp:include page="../common/heading/heading.jsp"/>
+        <div class="app-admin-wrap-layout-1 sidebar-full sidebar-theme-slate">
+            <!--== MAIN CONTRAINER ==-->
+            <jsp:include page="../common/heading/heading.jsp"/>
 
-        <!--== BODY CONTNAINER ==-->
-        <div class="container-fluid sb2">
-            <div class="row">
-                <!--== USER INFO ==-->
-
-                <!--== LEFT MENU ==-->
-                <jsp:include page="../common/sidebar/sidebarLeft.jsp"/>
-
-
-                <!--== BODY INNER CONTAINER ==-->
-                <div class="sb2-2">
-                    <!--== breadcrumbs ==-->
-                    <div class="sb2-2-2">
-                        <ul>
-                            <li><a href="admin-home"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-                            <li class="active-bre"><a href="#"> Add New Account</a></li>
-                        </ul>
-                    </div>
-
-                    <!--== User Details ==-->
-                    <div class="sb2-2-3">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="box-inn-sp admin-form">
-                                    <div class="sb2-2-add-blog sb2-2-1">
-                                        <h2>Add New Course</h2>
-                                        <!--<p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>-->
-
-                                        <ul class="nav nav-tabs tab-list">
-                                            <li class="active"><a data-toggle="tab" href="#home" aria-expanded="true"><i class="fa fa-info" aria-hidden="true"></i> <span>Detail</span></a></li>
-                                            <li class=""><a data-toggle="tab" href="#menu1" aria-expanded="false"><i class="fa fa-bed" aria-hidden="true"></i> <span>ADMIN</span></a></li>
-                                            <li class=""><a data-toggle="tab" href="#menu2" aria-expanded="false"><i class="fa fa-picture-o" aria-hidden="true"></i> <span>Student</span></a></li>
-                                            <li class=""><a data-toggle="tab" href="#menu3" aria-expanded="false"><i class="fa fa-facebook" aria-hidden="true"></i> <span>Lecturer (Teacher)</span></a></li>
-                                            <li class=""><a data-toggle="tab" href="#menu4" aria-expanded="false"><i class="fa fa-phone" aria-hidden="true"></i> <span>CRDD</span></a></li>
-                                        </ul>
-
-                                        <div class="tab-content">
-                                            <div id="home" class="tab-pane fade active in">
-                                                <div class="box-inn-sp">
-                                                    <div class="inn-title">
-                                                        <h4>Account Information</h4>
-                                                        <p></p>
-                                                    </div>
-                                                    <div class="bor">
-                                                        <form action="ádasd" method="get">
-                                                            <div class="row">
-                                                                <div class="input-field col s12">
-                                                                    <input id="list-title" type="text" class="validate" name="userName">
-                                                                    <label for="list-title" class="">User Name</label>
-                                                                </div>
-                                                                <div class="input-field col s12">
-                                                                    <input id="list-name" type="password" class="validate" name="password">
-                                                                    <label for="list-name">Password</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="input-field col s12">
-                                                                    <input id="list-name" type="text" class="validate" name="email">
-                                                                    <label>Email</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="input-field col s12">
-                                                                    <select nmae="role">
-                                                                        <option value="" disabled selected>Role</option>
-                                                                        <c:forEach begin="0" end="5" var="i">
-                                                                            <option value="${i+1}" >Role ${i+1}</option>
-                                                                        </c:forEach>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="input-field col s12">
-                                                                    <i class="waves-effect waves-light btn-large waves-input-wrapper" style="">
-                                                                        <input type="submit" class="waves-button-input" value="Submit"></i>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="menu1" class="tab-pane fade">
-                                                <div class="inn-title">
-                                                    <h4>ADMIN</h4>
-                                                    <!--<p>Airtport Hotels The Right Way To Start A Short Break Holiday</p>-->
-                                                </div>
-                                                <div class="bor ad-cou-deta-h4">
-                                                    <form action="" method="">
-                                                        <h4>Requirements:</h4>
-                                                        <div class="row">
-                                                            <div class="input-field col s12">
-                                                                <textarea class="materialize-textarea"></textarea>
-                                                                <label>Course Descriptions:</label>
-                                                            </div>
-                                                        </div> 
-                                                        <h4>Feese:</h4>
-                                                        <div class="row">
-                                                            <div class="input-field col s12">
-                                                                <input type="number" class="validate" required>
-                                                                <label>1'st terms feese</label>
-                                                            </div>
-                                                            <div class="input-field col s12">
-                                                                <input type="number" class="validate" required>
-                                                                <label>2'nd terms feese</label>
-                                                            </div>
-                                                            <div class="input-field col s12">
-                                                                <input type="number" class="validate" required>
-                                                                <label>3'rd terms feese</label>
-                                                            </div>
-                                                            <div class="input-field col s12">
-                                                                <textarea class="materialize-textarea"></textarea>
-                                                                <label>Price Descriptions:</label>
-                                                            </div>
-                                                        </div>
-                                                        <h4>Student Profile:</h4>
-                                                        <div class="row">
-                                                            <div class="input-field col s12">
-                                                                <textarea class="materialize-textarea"></textarea>
-                                                                <label>Student Profile Descriptions:</label>
-                                                            </div>
-                                                        </div>	
-                                                        <h4>How to apply this course:</h4>
-                                                        <div class="row">
-                                                            <div class="input-field col s12">
-                                                                <input type="text" class="validate" required>
-                                                                <label>Step 1 Descriptions:</label>
-                                                            </div>
-                                                            <div class="input-field col s12">
-                                                                <input type="text" class="validate" required>
-                                                                <label>Step 2 Descriptions:</label>
-                                                            </div>
-                                                            <div class="input-field col s12">
-                                                                <input type="text" class="validate" required>
-                                                                <label>Step 3 Descriptions:</label>
-                                                            </div>
-                                                            <div class="input-field col s12">
-                                                                <input type="text" class="validate" required>
-                                                                <label>Step 4 Descriptions:</label>
-                                                            </div>
-                                                            <div class="input-field col s12">
-                                                                <input type="text" class="validate" required>
-                                                                <label>Step 5 Descriptions:</label>
-                                                            </div>
-                                                        </div>	
-                                                        <div class="row">
-                                                            <div class="input-field col s12">
-                                                                <i class="waves-effect waves-light btn-large waves-input-wrapper" style=""><input type="submit" class="waves-button-input" value="Submit"></i>
-                                                            </div>
-                                                        </div>										
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <div id="menu2" class="tab-pane fade">
-                                                <div class="inn-title">
-                                                    <h4>Photo Gallery</h4>
-                                                    <p>Airtport Hotels The Right Way To Start A Short Break Holiday</p>
-                                                </div>
-                                                <div class="bor">
-                                                    <form action="asdasdsa">
-                                                        <div class="file-field input-field">
-                                                            <div class="btn admin-upload-btn">
-                                                                <span>File</span>
-                                                                <input type="file" multiple="" >
-                                                            </div>
-                                                            <div class="file-path-wrapper">
-                                                                <input class="file-path validate" type="text" placeholder="Upload course banner image">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="input-field col s12">
-                                                                <i class="waves-effect waves-light btn-large waves-input-wrapper" style=""><input type="submit" class="waves-button-input" value="Upload"></i>
-                                                            </div>
-                                                        </div>
-
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <div id="menu3" class="tab-pane fade">
-                                                <div class="inn-title">
-                                                    <h4>Time table</h4>
-                                                    <p>Airtport Hotels The Right Way To Start A Short Break Holiday</p>
-                                                </div>
-                                                <div class="bor ad-cou-deta-h4">
-                                                    <form>
-                                                        <h4>1st semester:</h4>
-                                                        <div class="row">
-                                                            <div class="input-field col s12">
-                                                                <input type="text" class="validate" required>
-                                                                <label>Title:</label>
-                                                            </div>
-                                                            <div class="input-field col s12">
-                                                                <textarea class="materialize-textarea"></textarea>
-                                                                <label>Descriptions:</label>
-                                                            </div>
-                                                        </div> 
-                                                        <h4>2nd semester:</h4>
-                                                        <div class="row">
-                                                            <div class="input-field col s12">
-                                                                <input type="text" class="validate" required>
-                                                                <label>Title:</label>
-                                                            </div>
-                                                            <div class="input-field col s12">
-                                                                <textarea class="materialize-textarea"></textarea>
-                                                                <label>Descriptions:</label>
-                                                            </div>
-                                                        </div> 
-                                                        <h4>3rd semester:</h4>
-                                                        <div class="row">
-                                                            <div class="input-field col s12">
-                                                                <input type="text" class="validate" required>
-                                                                <label>Title:</label>
-                                                            </div>
-                                                            <div class="input-field col s12">
-                                                                <textarea class="materialize-textarea"></textarea>
-                                                                <label>Descriptions:</label>
-                                                            </div>
-                                                        </div> 
-                                                        <h4>4th semester:</h4>
-                                                        <div class="row">
-                                                            <div class="input-field col s12">
-                                                                <input type="text" class="validate" required>
-                                                                <label>Title:</label>
-                                                            </div>
-                                                            <div class="input-field col s12">
-                                                                <textarea class="materialize-textarea"></textarea>
-                                                                <label>Descriptions:</label>
-                                                            </div>
-                                                        </div> 
-
-                                                        <div class="row">
-                                                            <div class="input-field col s12">
-                                                                <i class="waves-effect waves-light btn-large waves-input-wrapper" style=""><input type="submit" class="waves-button-input" value="Submit"></i>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <div id="menu4" class="tab-pane fade">
-                                                <div class="inn-title">
-                                                    <h4>Contact Info</h4>
-                                                    <p>Airtport Hotels The Right Way To Start A Short Break Holiday</p>
-                                                </div>
-                                                <div class="bor">
-                                                    <form>
-                                                        <div class="row">
-                                                            <div class="input-field col s6">
-                                                                <input id="t5-n1" type="text" class="validate">
-                                                                <label for="t5-n1">Contact Name</label>
-                                                            </div>
-                                                            <div class="input-field col s6">
-                                                                <input id="t5-n2" type="text" class="validate">
-                                                                <label for="t5-n2">Alter Contact Name</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="input-field col s6">
-                                                                <input id="t5-n3" type="number" class="validate">
-                                                                <label for="t5-n3">Phone</label>
-                                                            </div>
-                                                            <div class="input-field col s6">
-                                                                <input id="t5-n4" type="number" class="validate">
-                                                                <label for="t5-n4">Mobile</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="input-field col s12">
-                                                                <input id="t5-n5" type="email" class="validate">
-                                                                <label for="t5-n5">Email</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="input-field col s12">
-                                                                <textarea id="t5-n6" class="materialize-textarea"></textarea>
-                                                                <label for="t5-n6">Listing Descriptions:</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="input-field col s12">
-                                                                <i class="waves-effect waves-light btn-large waves-input-wrapper" style=""><input type="submit" class="waves-button-input" value="Upload"></i>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+            <!--== BODY CONTNAINER ==-->
+            <div>
+                <div class="main-content-body">
+                    <!-- Start:: content (Your custom content)  -->
+                    <div class="subheader px-lg" style="padding: 0">
+                        <div class="subheader-container">
+                            <div class="subheader-main">
+                                <nav aria-label="breadcrumb" class="ul-breadcrumb">
+                                    <ol class="ul-breadcrumb-items">
+                                        <li class="breadcrumb-home"><a href="#"> <i class="material-icons"
+                                                                                    >home</i></a></li>
+                                        <li class="breadcrumb-item"><a href="#">FLM</a></li>
+                                        <li class="breadcrumb-item active"><a href="#">Add User Management</a></li>
+                                    </ol>
+                                </nav>
                             </div>
                         </div>
                     </div>
-                </div>
+                    
+                    
+                    <div style="max-width: 720px; margin-left: auto; margin-right: auto;">
+                        <form id="formAdd" class="needs-validation" method="POST" action="admin-adduser">
+                            
+                            <div class="">
+                                <div class="form-group col-md-12">
+                                    <label for="inputUsername" class="ml-2" style="font-size: 15px; color:black">Username</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control mt-2" id="inputUsername" placeholder="Input Username" name="inputUsername" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="inputPassword" class="ml-2" style="font-size: 15px; color:black">Password</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control mt-2" id="inputPassword" placeholder="Input Password" name="inputPassword" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="inputFullName" class="ml-2" style="font-size: 15px; color:black">Fullname</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control mt-2" id="inputFullName" placeholder="Input Fullname" name="inputFullName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
 
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="inputEmail" class="ml-2" style="font-size: 15px; color:black">Email</label>
+                                    <div class="input-group">
+                                        <input type="email" class="form-control mt-2" id="inputEmail" placeholder="Input Email" name="inputEmail" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 d-none">
+                                    <label for="inputAvatar" class="ml-2" style="font-size: 15px; color:black">Avatar</label>
+                                    <div class="input-group">
+                                        <input type="file" class="form-control mt-2" id="inputAvatar" placeholder="Input Avatar" name="inputAvatar" aria-describedby="inputGroupPrepend" style="font-size: 14px;"></input>
+                                    </div>
+                                </div>
+                                <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Role</label>
+                                <div class="form-group col-md-12">
+                                    <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
+                                        <c:forEach items="${roles}" var="role">
+                                            <c:if test="${role.rid != 6}">
+                                                <option value="${role.rid}"><c:out value="${role.rname}"/></option>
+                                            </c:if>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12 form-group">
+                                    <label class="ml-2" style="font-size: 15px">Status</label>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <div class="input-group">
+                                        <label for="inputStatus1" class="ml-2" style="font-size: 15px">Active</label>
+                                        <input type="radio" value="1" class="form-control mt-2" id="inputStatus1" name="inputStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
+                                            <label for="inputStatus2" class="ml-2" style="font-size: 15px">Inactive</label>
+                                            <input type="radio" value="0" class="form-control mt-2" id="inputStatus2" name="inputStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
+                                    </div>                                    
+                                </div>
+                            </div>
+                            
+                            <div class="" style="margin: 0 auto; display: flex; justify-content: center" >
+                                        <button class="btn btn-opacity-success" type="submit">Save</button>
+                            </div>
+                        </form>
+                        
+                        
+<!--                        <form class="form-horizontal error" novalidate>
+                            <div class="row">
+
+                              <div class="col-md-4 mb-md">
+                                <div class="control-group">
+                                  <div class="controls">
+                                    <input type="text" class="form-control" placeholder="username" required data-validation-required-message="Full Name Required" />
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-4 mb-md">
+                                <div class="control-group">
+                                  <div class="controls">
+                                    <input type="email" class="form-control" placeholder="example@domain.com" required data-validation-required-message="Email Fill is Required" />
+                                  </div>
+                                </div>
+                              </div>
+                                
+                            </div>
+                            <button class="btn btn-raised-primary" type="submit">Submit</button>
+                        </form>-->
+
+
+                        
+                        
+                    </div>  
+                    
+                    
+                </div>
             </div>
         </div>
 
-        <!--Import jQuery before materialize.js-->
-        <script src="js/main.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/materialize.min.js"></script>
-        <script src="js/custom.js"></script>
+        <script src="admin-template/js/vendors.bundle.min.js"></script>
+        <script src="admin-template/js/main.bundle.min.js"></script>
+        <script src="admin-template/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="admin-template/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="admin-template/js/pages/datatables/basicDatatable.min.js"></script>
+        <script type="text/javascript">
+            
+        </script>
+        <script>
+            $(document).ready(function() {
+              $(".js-example-basic-multiple").select2();
+            });
+        </script>
+        <script>
+            $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
+        </script>
     </body>
-
-
 </html>

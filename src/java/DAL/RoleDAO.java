@@ -22,8 +22,8 @@ public class RoleDAO extends DBContext {
     public List<Role> getAllRole() {
         List<Role> roleList = new ArrayList<>();
         try {
-            String sql = "Select r.rid,"
-                    + "rname from role r";
+            String sql = "Select rid,"
+                    + "rname from role";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
