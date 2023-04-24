@@ -95,19 +95,32 @@ public class RegisterController extends HttpServlet {
         Role role = new Role(1, "Guest");
         Set<Role> roles = new HashSet<Role>();
         roles.add(role);
-        Account a = new Account(new DAO().getLastAccountID() + 1, userName, password, fullName, email, "images/avatar/default.png", false, 1, Custom.Common.getCurrentDate(), roles);
+        Account a = new Account(new DAO().getLastAccountID() + 1, userName, password, fullName, email, "images/avatar/default.png", false, 1, Custom.Common.getCurrentDate(),null ,roles);
         
         if(ad.checkRegisterEdit(userName, email)){
             if(ad.register(a) != 0){
-            // success
-            this.sendMail(request, response);
-            Map<String, String> options = new LinkedHashMap<>();
-            options.put("messageRegister", "Registration success");
-            String json = new Gson().toJson(options);
+                // success
+                Account newAccount = ad.findAccountByEmail(email);
+                int createRole = ad.addAccountRole(newAccount.getAccountID(), 1, 1);
+                if(createRole > 0){
+                    this.sendMail(request, response);
+                    Map<String, String> options = new LinkedHashMap<>();
+                    options.put("messageRegister", "Registration success");
+                    String json = new Gson().toJson(options);
 
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(json);
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write(json);
+                }else {
+                    // response
+                    Map<String, String> options = new LinkedHashMap<>();
+                    options.put("error", "Registration failed");
+                    String json = new Gson().toJson(options);
+
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write(json);
+                }
             }else {
                 // response
                 Map<String, String> options = new LinkedHashMap<>();

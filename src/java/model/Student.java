@@ -13,8 +13,8 @@ public class Student extends Account{
     public Student() {
     }
 
-    public Student(int accountID, String userName, String password, String displayName, String email, String avatar, boolean isBlock, int status, Date createDate, Set<Role> roles) {
-        super(accountID, userName, password, displayName, email, avatar, isBlock, status, createDate, roles);
+    public Student(int accountID, String userName, String password, String displayName, String email, String avatar, boolean isBlock, int status, Date createDate,String mobile, Set<Role> roles) {
+        super(accountID, userName, password, displayName, email, avatar, isBlock, status, createDate,mobile, roles);
     }
 
     public String getStid() {

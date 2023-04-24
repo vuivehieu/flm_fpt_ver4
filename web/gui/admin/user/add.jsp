@@ -49,36 +49,36 @@
                     
                     
                     <div style="max-width: 720px; margin-left: auto; margin-right: auto;">
-                        <form id="formAdd" class="needs-validation" method="POST" action="admin-adduser">
+                        <form id="formAdd" class="needs-validation" method="POST" action="admin-adduser" enctype="multipart/form-data">
                             
                             <div class="">
                                 <div class="form-group col-md-12">
                                     <label for="inputUsername" class="ml-2" style="font-size: 15px; color:black">Username</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control mt-2" id="inputUsername" placeholder="Input Username" name="inputUsername" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                        <input type="text" onFocus="focusUserName()" class="form-control mt-2" id="inputUsername" placeholder="Input Username" name="inputUsername" aria-describedby="inputGroupPrepend" required style="font-size: 14px;"/>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-12">
+<!--                                <div class="form-group col-md-12 d-none">
                                     <label for="inputPassword" class="ml-2" style="font-size: 15px; color:black">Password</label>
                                     <div class="input-group">
                                         <input type="password" class="form-control mt-2" id="inputPassword" placeholder="Input Password" name="inputPassword" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="form-group col-md-12">
                                     <label for="inputFullName" class="ml-2" style="font-size: 15px; color:black">Fullname</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control mt-2" id="inputFullName" placeholder="Input Fullname" name="inputFullName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                        <input type="text" class="form-control mt-2" id="inputFullName" placeholder="Input Fullname" name="inputFullName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;"/>
 
                                     </div>
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="inputEmail" class="ml-2" style="font-size: 15px; color:black">Email</label>
                                     <div class="input-group">
-                                        <input type="email" class="form-control mt-2" id="inputEmail" placeholder="Input Email" name="inputEmail" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                        <input type="email" onFocus="focusEmail()" class="form-control mt-2" id="inputEmail" placeholder="Input Email" name="inputEmail" aria-describedby="inputGroupPrepend" required style="font-size: 14px;"/>
 
                                     </div>
                                 </div>
-                                <div class="form-group col-md-12 d-none">
+                                <div class="form-group col-md-12 ">
                                     <label for="inputAvatar" class="ml-2" style="font-size: 15px; color:black">Avatar</label>
                                     <div class="input-group">
                                         <input type="file" class="form-control mt-2" id="inputAvatar" placeholder="Input Avatar" name="inputAvatar" aria-describedby="inputGroupPrepend" style="font-size: 14px;"></input>
@@ -112,34 +112,7 @@
                                         <button class="btn btn-opacity-success" type="submit">Save</button>
                             </div>
                         </form>
-                        
-                        
-<!--                        <form class="form-horizontal error" novalidate>
-                            <div class="row">
-
-                              <div class="col-md-4 mb-md">
-                                <div class="control-group">
-                                  <div class="controls">
-                                    <input type="text" class="form-control" placeholder="username" required data-validation-required-message="Full Name Required" />
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="col-md-4 mb-md">
-                                <div class="control-group">
-                                  <div class="controls">
-                                    <input type="email" class="form-control" placeholder="example@domain.com" required data-validation-required-message="Email Fill is Required" />
-                                  </div>
-                                </div>
-                              </div>
-                                
-                            </div>
-                            <button class="btn btn-raised-primary" type="submit">Submit</button>
-                        </form>-->
-
-
-                        
-                        
+                        <p style="font-size: 14px ;color: red;text-align: center ; margin-top: 6px" id="errorMessage">${error != null ? error : ''}</p>
                     </div>  
                     
                     
@@ -153,15 +126,18 @@
         <script src="admin-template/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
         <script src="admin-template/js/pages/datatables/basicDatatable.min.js"></script>
         <script type="text/javascript">
-            
+            function focusUserName(){
+                document.getElementById("errorMessage").innerHTML = '';
+            }
+            function focusEmail(){
+                document.getElementById("errorMessage").innerHTML = '';
+            }  
         </script>
         <script>
             $(document).ready(function() {
               $(".js-example-basic-multiple").select2();
             });
         </script>
-        <script>
-            $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
-        </script>
+        
     </body>
 </html>

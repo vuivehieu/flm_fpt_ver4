@@ -109,7 +109,7 @@ public class LoginGoogleController extends HttpServlet {
         
         //true => khong co tk => tao moi, false => da co tk, cho login bang tk cu
         if(ad.checkEmail(email)){
-            Account a = new Account(new DAO().getLastAccountID() + 1, userName, password, fullName, email, accountGoogle.getPicture(), false, 1, Custom.Common.getCurrentDate(), roles);
+            Account a = new Account(new DAO().getLastAccountID() + 1, userName, password, fullName, email, accountGoogle.getPicture(), false, 1, Custom.Common.getCurrentDate(),null ,roles);
             if(ad.register(a) != 0){
                 // success
                 this.sendMail(request, response);

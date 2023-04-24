@@ -10,7 +10,7 @@
 
         <!-- Font Awesome -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-        <link href="../../../../fe/css/style.css" rel="stylesheet">
+        <!--<link href="fe/css/style.css" rel="stylesheet">-->
         <!-- Libraries Stylesheet -->
         <link href="fe/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
         <link href="fe/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
@@ -142,15 +142,15 @@
     let signUpBtn = document.getElementById("signUpBtn");
     if(signUpBtn) {
         signUpBtn.addEventListener("click", function () {
-        document.getElementById('email').value = '';
-        document.getElementById('userName').value = '';
-        document.getElementById('fullName').value = '';
-        document.getElementById('password').value = '';
-        document.getElementById('comfirm-password').value = '';
-        document.getElementById('verifyCode').value = '';
-        document.getElementById("errorMessage").innerHTML = '';
-        document.getElementById("messageRegister").innerHTML = '';
-    });
-    });
+            document.getElementById('email').value = '';
+            document.getElementById('userName').value = '';
+            document.getElementById('fullName').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('comfirm-password').value = '';
+            document.getElementById('verifyCode').value = '';
+            document.getElementById("errorMessage").innerHTML = '';
+            document.getElementById("messageRegister").innerHTML = '';
+        });
+    };
 </script>
 

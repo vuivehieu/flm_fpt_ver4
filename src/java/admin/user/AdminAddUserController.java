@@ -20,7 +20,16 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Properties;
+import java.util.Random;
 import java.util.Set;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import model.Account;
 import model.Role;
 
@@ -92,7 +101,7 @@ public class AdminAddUserController extends HttpServlet {
         String userName = request.getParameter("inputUsername");
         String fullName = request.getParameter("inputFullName");
         String email = request.getParameter("inputEmail");
-        String password = request.getParameter("inputPassword");
+//        String password = request.getParameter("inputPassword");
 //        String avatar = request.getParameter("inputAvatar");
         int status = Integer.parseInt(request.getParameter("inputStatus"));
 //        int role = Integer.parseInt(request.getParameter("inputRole"));
@@ -103,8 +112,10 @@ public class AdminAddUserController extends HttpServlet {
         String fileName = extractFileName(file);
         // refines the fileName in case it is an absolute path
         fileName = new File(fileName).getName();
-        file.write(this.getFolderUpload().getAbsolutePath() + File.separator + fileName);
-        String avatar = "images\\avatar" + File.separator + fileName;
+        if(!"".equals(fileName)){
+             file.write(this.getFolderUpload().getAbsolutePath() + File.separator + fileName);
+        }
+        String avatar = "images/avatar" + File.separator + fileName;
 
         // Kiểm tra roles không null và không rỗng
         if (roleIds != null && roleIds.length > 0) {
@@ -118,35 +129,46 @@ public class AdminAddUserController extends HttpServlet {
             }
         }
         
-        
         Account a = new Account();
         a.setDisplayName(fullName);
         a.setEmail(email);
-        a.setPassword(Custom.ConvertMD5.convertPassToMD5(password));
+        
         a.setIsBlock(false);
         a.setAvatar(avatar);
         a.setStatus(status);
         a.setCreateDate(new java.sql.Date(System.currentTimeMillis()));
-//        a.setRole(new Role(role, null));
+        a.setMobile(null);
         a.setRoles(rolesSet);
-        
         a.setUserName(userName);
-        if (a.getAvatar().equals("")) {
+        if (a.getAvatar().equals("images/avatar\\")) {
             a.setAvatar("images/avatar/default.png");
         }
+        
         if(accountDAO.checkByUsernameAndEmail(a.getUserName(), a.getEmail())){
-            int addAccount = accountDAO.addUser(a);
-            if(addAccount > 0){
-                Account newAccount = accountDAO.findAccountByEmail(email);
-                if (roleIds != null && roleIds.length > 0) {
-                    for (String roleId : roleIds) {
-                        int roleId1 = Integer.parseInt(roleId);
-                        accountDAO.addAccountRole(newAccount.getAccountID(), roleId1, 1);
-                    }
+            String ramdomPass = this.sendMail(request, response, email, userName);
+            if(ramdomPass != null){
+                a.setPassword(Custom.ConvertMD5.convertPassToMD5(ramdomPass));
+                int addAccount = accountDAO.addUser(a);
+                if(addAccount > 0){
+                    Account newAccount = accountDAO.findAccountByEmail(email);
+                    if (roleIds != null && roleIds.length > 0) {
+                        for (String roleId : roleIds) {
+                            int roleId1 = Integer.parseInt(roleId);
+                            accountDAO.addAccountRole(newAccount.getAccountID(), roleId1, 1);
+                        }
+                    } 
                 } 
-            } 
+            }
+            response.sendRedirect(request.getContextPath() + "/admin-alluser");
+        }else {
+            RoleDAO roleDAO = new RoleDAO();
+            List<Role> roleList = roleDAO.getAllRole();
+            request.setAttribute("roles", roleList);
+            request.setAttribute("error", "UserName or Email is already registered, please enter another userName or email");
+            request.getRequestDispatcher("/gui/admin/user/add.jsp").forward(request, response);
+//            response.sendRedirect(request.getContextPath() + "/admin-alluser");
         }
-        response.sendRedirect(request.getContextPath() + "/admin-alluser");
+        
     }
 
     /** 
@@ -176,5 +198,61 @@ public class AdminAddUserController extends HttpServlet {
             folderUpload.mkdirs();
         }
         return folderUpload;
+    }
+    
+    private String sendMail(HttpServletRequest request, HttpServletResponse response, String email, String userName) throws ServletException, IOException {
+
+        String ramdomPass = this.generateRandomString(8);
+
+        final String from = "dothang4477@gmail.com";
+        final String password = "irlsqjizsiwfwnzu";
+        String host = "smtp.gmail.com";
+        int port = 587;
+        String to = email;
+        String subject = "New account notification: " + userName;
+        String content = "The password for your account is: " + ramdomPass;
+
+        // Thiết lập các thuộc tính email
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", port);
+
+        // Tạo phiên gửi email và thiết lập thông tin người gửi
+        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(from, password);
+            }
+        });
+
+        try {
+            // Tạo đối tượng MimeMessage và thiết lập các thuộc tính email
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            message.setSubject(subject);
+            message.setText(content);
+
+            // Gửi email
+            Transport.send(message);
+            
+            return ramdomPass;
+
+            // Chuyển hướng đến trang xác nhận email
+        } catch (MessagingException e) {
+            throw new RuntimeException("error: " + e);
+        }
+    }
+    
+    public static String generateRandomString(int length) {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder sb = new StringBuilder(length);
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(characters.length());
+            sb.append(characters.charAt(index));
+        }
+        return sb.toString();
     }
 }
