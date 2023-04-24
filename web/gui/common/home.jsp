@@ -141,7 +141,7 @@
                                 <a href="admin-settings" class="d-block text-black pb-2">System Setting</a>
                                 <a href="#" class="d-block text-black pb-2">Role Permissions</a>
                                 <a href="admin-alluser" class="d-block text-black pb-2">User Management</a>
-                                <a href="#" class="text-black">Decision Management</a>
+                                <a href="admin-decisions" class="text-black">Decision Management</a>
                             </div>
                         </div>
                     </div>
@@ -182,7 +182,7 @@
                                 <a href="#" class="d-block text-black pb-2">Assign Curriculum</a>
                                 <a href="#" class="d-block text-black pb-2">Approve, Disapprove Curriculum</a>
                                 <a href="#" class="d-block text-black ">Approve, Disapprove Syllabus</a>
-                                <a href="#" class="d-block text-black ">Approve, Disapprove Decision</a>
+                                <a href="admin-decisions" class="d-block text-black ">Approve, Disapprove Decision</a>
                             </div>
                         </div>
                     </div>
