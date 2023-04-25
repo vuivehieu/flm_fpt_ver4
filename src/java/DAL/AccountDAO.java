@@ -697,8 +697,8 @@ public class AccountDAO extends DBContext {
         try {
 
             String sql = "INSERT INTO `swp391_bl5_g6`.`account`\n"
-                    + "(`userName`, `password`, `displayName`, `email`, `avatar`, `isBlock`, `status`, `createDate`)\n"
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+                    + "(`userName`, `password`, `displayName`, `email`, `avatar`, `isBlock`, `status`, `createDate`, `mobile`)\n"
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, a.getUserName());
@@ -709,6 +709,7 @@ public class AccountDAO extends DBContext {
             st.setBoolean(6, a.isIsBlock());
             st.setInt(7, a.getStatus());
             st.setDate(8, a.getCreateDate());
+            st.setString(9, a.getMobile());
             return st.executeUpdate();
         } catch (Exception e) {
             System.out.println("AccountDAO -> addUser(): " + e);

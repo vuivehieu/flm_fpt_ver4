@@ -17,7 +17,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
@@ -96,15 +95,12 @@ public class AdminAddUserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-//        processRequest(request, response);
         AccountDAO accountDAO = new AccountDAO();
         String userName = request.getParameter("inputUsername");
         String fullName = request.getParameter("inputFullName");
+        String mobile = request.getParameter("inputMobile");
         String email = request.getParameter("inputEmail");
-//        String password = request.getParameter("inputPassword");
-//        String avatar = request.getParameter("inputAvatar");
         int status = Integer.parseInt(request.getParameter("inputStatus"));
-//        int role = Integer.parseInt(request.getParameter("inputRole"));
 
         Set<Role> rolesSet = new HashSet<>();
         String[] roleIds = request.getParameterValues("states[]");
@@ -137,7 +133,7 @@ public class AdminAddUserController extends HttpServlet {
         a.setAvatar(avatar);
         a.setStatus(status);
         a.setCreateDate(new java.sql.Date(System.currentTimeMillis()));
-        a.setMobile(null);
+        a.setMobile(mobile);
         a.setRoles(rolesSet);
         a.setUserName(userName);
         if (a.getAvatar().equals("images/avatar\\")) {
