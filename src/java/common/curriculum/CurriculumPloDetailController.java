@@ -11,8 +11,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import model.Account;
 import model.Curriculum;
 import model.Subject_Mapping_PLO;
 
@@ -21,7 +25,8 @@ import model.Subject_Mapping_PLO;
  * @author PCM
  */
 @WebServlet(name = "CurriculumPloDetailController", urlPatterns = {"/ploDetailView"})
-public class CurriculumPloDetailController extends HttpServlet{
+public class CurriculumPloDetailController extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -60,8 +65,17 @@ public class CurriculumPloDetailController extends HttpServlet{
             Curriculum cur = dao.getCurriculumByCurid(curid);
             request.setAttribute("curCode", cur.getCurCode());
             request.setAttribute("curid", cur.getCurid());
-            request.setAttribute("list", curriculumDAO.getAllPloByCurriculumID(curid));
-
+            HttpSession session = request.getSession();
+            if(session.getAttribute("account")!=null){
+                if (!((Account) session.getAttribute("account")).getRoles().stream().map(x->x.getRid()).collect(Collectors.toList()).contains(5) && !((Account) session.getAttribute("account")).getRoles().stream().map(x->x.getRid()).collect(Collectors.toList()).contains(6) && ((Account) session.getAttribute("account")).getRoles().stream().map(x->x.getRid()).collect(Collectors.toList()).contains(7)) {
+                    request.setAttribute("list", curriculumDAO.getAllPloByCurriculumID(curid).stream().filter(x -> x.isIsActive()).collect(Collectors.toList()));
+                } else {
+                    request.setAttribute("list", curriculumDAO.getAllPloByCurriculumID(curid));
+                }
+            }else{
+                request.setAttribute("list", curriculumDAO.getAllPloByCurriculumID(curid).stream().filter(x -> x.isIsActive()).collect(Collectors.toList()));
+            }
+            
         } catch (NumberFormatException e) {
             System.out.println("common.curriculum -> CurriculumPoDetailController -> doGet(): " + e);
         }
@@ -80,9 +94,8 @@ public class CurriculumPloDetailController extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
-    
 
     /**
      * Returns a short description of the servlet.

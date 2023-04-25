@@ -161,7 +161,7 @@
                                                                 <span class="badge badge-danger">Inactive</span>
                                                             </c:if>
                                                         </td>
-                                                                <td style="vertical-align: middle;"><button class="btn" style="border: 0.2px solid black;float: right;" onclick="showEditForm(${item.ploid})">Edit</button></td>
+                                                                <td style="vertical-align: middle;"><button class="btn" style="border: 0.2px solid black;float: right;" onclick="showEditForm(${item.ploid}, ${curid})">Edit</button></td>
                                                                     <c:set var="stopLoop3" value="true"/>
                                                                 </c:if>
                                                             </c:if>
@@ -201,8 +201,8 @@
         <!-- Template Javascript -->
         <script src="fe/js/main.js"></script>
         <script>
-                                                function showEditForm(id) {
-                                                    window.location.href = '<%= request.getContextPath() %>/curriculum-ploEdit?ploid=' + id;
+                                                function showEditForm(id, curid) {
+                                                    window.location.href = '<%= request.getContextPath() %>/curriculum-ploEdit?ploid=' + id +'&curid='+curid;
                                                 }
         </script>
     </body>
