@@ -58,16 +58,17 @@
                                         <input type="text" onFocus="focusUserName()" class="form-control mt-2" id="inputUsername" placeholder="Input Username" name="inputUsername" aria-describedby="inputGroupPrepend" required style="font-size: 14px;"/>
                                     </div>
                                 </div>
-<!--                                <div class="form-group col-md-12 d-none">
-                                    <label for="inputPassword" class="ml-2" style="font-size: 15px; color:black">Password</label>
-                                    <div class="input-group">
-                                        <input type="password" class="form-control mt-2" id="inputPassword" placeholder="Input Password" name="inputPassword" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
-                                    </div>
-                                </div>-->
                                 <div class="form-group col-md-12">
                                     <label for="inputFullName" class="ml-2" style="font-size: 15px; color:black">Fullname</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control mt-2" id="inputFullName" placeholder="Input Fullname" name="inputFullName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;"/>
+
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="inputMobile" class="ml-2" style="font-size: 15px; color:black">Mobile</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control mt-2" id="inputMobile" placeholder="Input Mobile" name="inputMobile" aria-describedby="inputGroupPrepend" required style="font-size: 14px;"/>
 
                                     </div>
                                 </div>
