@@ -321,7 +321,7 @@
 
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <form id="formEdit" class="needs-validation" method="POST" action="admin-updateuser" enctype="multipart/form-data">
+                                <form id="formEdit" class="needs-validation" method="POST" action="admin-updateuser">
                                     <div class="modal-header" style="background: #304156;padding: 10px;">
                                         <h5 class="modal-title" id="exampleModalAdd" style="color: white">Edit User</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
