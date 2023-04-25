@@ -75,6 +75,21 @@
                     border-bottom-right-radius: .3rem;
                 }
             }
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+
+            li {
+                float: left;
+            }
+
+            li a {
+                display: block;
+                padding: 8px;
+            }
         </style>
 
     </head>
@@ -91,21 +106,23 @@
                             <div class="cor-con-mid">
                                 <div class="row">
                                 <div class="col-md-3">
-                                      <p>Curriculum Detail</p>
+                                    <p style="font-weight: bold">Curriculum Detail</p>
                                     <h2>${cur.curCode}</h2>
                                 </div>
-                                <div class="col-md-9">
-                                    <div style="margin-top: 20px">
-                                        <a class="btn btn-warning active color-warning-custom" href="curriculumDetails?curid=${cur.curid}" role="button">Overview</a>
-                                        <a class="btn btn-warning color-warning-custom" href="poDetailView?id=${cur.curid}" role="button">POs</a>
-                                        <a class="btn btn-warning color-warning-custom" href="ploDetailView?id=${cur.curid}" role="button">PLOs</a>
-                                        <a class="btn btn-warning color-warning-custom" href="ploDetailView?id=${cur.curid}" role="button">PLO-POs</a>
-                                        <a class="btn btn-warning color-warning-custom" href="subjectDetailView?id=${cur.curid}" role="button">Subjects</a>
-                                        <a class="btn btn-warning color-warning-custom" href="subjectDetailView?id=${cur.curid}" role="button">Subject-PLOs</a>
-                                        <a class="btn btn-warning color-warning-custom" href="comboDetailView?id=${cur.curid}" role="button">Combos</a>
-                                        <a class="btn btn-warning color-warning-custom" href="electiveDetailView?id=${cur.curid}" role="button">Electives</a>
+                                <div class="col-md-6" style="display: flex;
+                                         justify-content: center; margin-left: 45px">
+                                        <ul>
+                                            <li><a href="curriculumDetails?curid=${cur.curid}" style="color: black;margin-right: 2px;font-weight: bold;">Overview</a></li>
+                                            <li><a href="poDetailView?id=${cur.curid}" style="color: black;margin-right: 2px">POs</a></li>
+                                            <li><a href="ploDetailView?id=${cur.curid}" style="color: black;margin-right: 2px">PLOs</a></li>
+                                            <li><a href="ploDetailView?id=${cur.curid}" style="color: black;margin-right: 2px">PLO-POs</a></li>
+                                            <li><a href="subjectDetailView?id=${cur.curid}" style="color: black;margin-right: 2px">Subjects</a></li>
+                                            <li><a href="subjectDetailView?id=${cur.curid}" style="color: black;margin-right: 2px">Subject-PLOs</a></li>
+                                            <li><a href="comboDetailView?id=${cur.curid}" style="color: black;margin-right: 2px">Combos</a></li>
+                                            <li><a href="electiveDetailView?id=${cur.curid}" style="color: black;margin-right: 2px">Electives</a></li>
+                                        </ul>
                                     </div>
-                                </div>
+                                    <div class="col-md-3"></div>
                                 </div>
                                
                                     

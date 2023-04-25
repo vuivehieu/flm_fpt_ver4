@@ -75,6 +75,21 @@
                     border-bottom-right-radius: .3rem;
                 }
             }
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+
+            li {
+                float: left;
+            }
+
+            li a {
+                display: block;
+                padding: 8px;
+            }
         </style>
 
     </head>
@@ -91,21 +106,23 @@
                             <div class="cor-con-mid">
                                  <div class="row">
                                 <div class="col-md-3">
-                                      <p>Curriculum Detail</p>
+                                      <p style="font-weight: bold">Curriculum Detail</p>
                                     <h2>${curCode}</h2>
                                 </div>
-                                <div class="col-md-9">
-                                    <div style="margin-top: 20px">
-                                        <a class="btn btn-warning color-warning-custom" href="curriculumDetails?curid=${curid}" role="button">Overview</a>
-                                        <a class="btn btn-warning active color-warning-custom" href="poDetailView?id=${curid}" role="button">POs</a>
-                                        <a class="btn btn-warning color-warning-custom" href="ploDetailView?id=${curid}" role="button">PLOs</a>
-                                        <a class="btn btn-warning color-warning-custom" href="ploDetailView?id=${curid}" role="button">PLO-POs</a>
-                                        <a class="btn btn-warning color-warning-custom" href="subjectDetailView?id=${curid}" role="button">Subjects</a>
-                                        <a class="btn btn-warning color-warning-custom" href="subjectDetailView?id=${curid}" role="button">Subject-PLOs</a>
-                                        <a class="btn btn-warning color-warning-custom" href="comboDetailView?id=${curid}" role="button">Combos</a>
-                                        <a class="btn btn-warning color-warning-custom" href="electiveDetailView?id=${curid}" role="button">Electives</a>
+                                <div class="col-md-6" style="display: flex;
+                                         justify-content: center; margin-left: 45px">
+                                        <ul>
+                                            <li><a href="curriculumDetails?curid=${curid}" style="color: black;margin-right: 2px;">Overview</a></li>
+                                            <li><a href="poDetailView?id=${curid}" style="color: black;margin-right: 2px;font-weight: bold;">POs</a></li>
+                                            <li><a href="ploDetailView?id=${curid}" style="color: black;margin-right: 2px">PLOs</a></li>
+                                            <li><a href="ploDetailView?id=${curid}" style="color: black;margin-right: 2px">PLO-POs</a></li>
+                                            <li><a href="subjectDetailView?id=${curid}" style="color: black;margin-right: 2px">Subjects</a></li>
+                                            <li><a href="subjectDetailView?id=${curid}" style="color: black;margin-right: 2px">Subject-PLOs</a></li>
+                                            <li><a href="comboDetailView?id=${curid}" style="color: black;margin-right: 2px;">Combos</a></li>
+                                            <li><a href="electiveDetailView?id=${curid}" style="color: black;margin-right: 2px;">Electives</a></li>
+                                        </ul>
                                     </div>
-                                </div>
+                                    <div class="col-md-3"></div>
                                 </div>
                                     <div class="cor-p4" style="margin-top: 25px">
                                     <div class="table-responsive" style="margin-top: 30px;" id="root">

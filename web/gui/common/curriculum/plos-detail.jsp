@@ -75,6 +75,21 @@
                     border-bottom-right-radius: .3rem;
                 }
             }
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+
+            li {
+                float: left;
+            }
+
+            li a {
+                display: block;
+                padding: 8px;
+            }
         </style>
 
     </head>
@@ -91,27 +106,29 @@
                             <div class="cor-con-mid">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <p>Curriculum Detail</p>
+                                        <p style="font-weight: bold">Curriculum Detail</p>
                                         <h2>${curCode}</h2>
                                     </div>
-                                    <div class="col-md-9">
-                                        <div style="margin-top: 20px">
-                                            <a class="btn btn-warning color-warning-custom" href="curriculumDetails?curid=${curid}" role="button">Overview</a>
-                                            <a class="btn btn-warning color-warning-custom" href="poDetailView?id=${curid}" role="button">POs</a>
-                                            <a class="btn btn-warning active color-warning-custom" href="ploDetailView?id=${curid}" role="button">PLOs</a>
-                                            <a class="btn btn-warning color-warning-custom" href="ploDetailView?id=${curid}" role="button">PLO-POs</a>
-                                            <a class="btn btn-warning color-warning-custom" href="subjectDetailView?id=${curid}" role="button">Subjects</a>
-                                            <a class="btn btn-warning color-warning-custom" href="subjectDetailView?id=${curid}" role="button">Subject-PLOs</a>
-                                            <a class="btn btn-warning color-warning-custom" href="comboDetailView?id=${curid}" role="button">Combos</a>
-                                            <a class="btn btn-warning color-warning-custom" href="electiveDetailView?id=${curid}" role="button">Electives</a>
-                                        </div>
+                                    <div class="col-md-6" style="display: flex;
+                                         justify-content: center; margin-left: 45px">
+                                        <ul>
+                                            <li><a href="curriculumDetails?curid=${curid}" style="color: black;margin-right: 2px">Overview</a></li>
+                                            <li><a href="poDetailView?id=${curid}" style="color: black;margin-right: 2px">POs</a></li>
+                                            <li><a href="ploDetailView?id=${curid}" class="active" style="color: black;font-weight: bold;margin-right: 2px">PLOs</a></li>
+                                            <li><a href="ploDetailView?id=${curid}" style="color: black;margin-right: 2px">PLO-POs</a></li>
+                                            <li><a href="subjectDetailView?id=${curid}" style="color: black;margin-right: 2px">Subjects</a></li>
+                                            <li><a href="subjectDetailView?id=${curid}" style="color: black;margin-right: 2px">Subject-PLOs</a></li>
+                                            <li><a href="comboDetailView?id=${curid}" style="color: black;margin-right: 2px">Combos</a></li>
+                                            <li><a href="electiveDetailView?id=${curid}" style="color: black;margin-right: 2px">Electives</a></li>
+                                        </ul>
                                     </div>
+                                    <div class="col-md-3"></div>
                                 </div>
                                 <c:set var="stopLoop" value="false"/>
                                 <c:forEach var="role" items="${account.roles}">
                                     <c:if test="${!stopLoop}">
                                         <c:if test="${(role.rid == 6) || (role.rid == 5) || (role.rid == 7)}">
-                                            <button class="btn" style="border: 0.2px solid black;float: right;margin-right: 20px;margin-bottom: 20px" onclick="showAddForm(${curid})">Add New PLO</button>
+                                            <button class="btn" style="border: 0.2px solid black;float: right;margin-right: 20px;margin-bottom: 20px" onclick="showAddPlo(${curid})">Add New PLO</button>
                                             <c:set var="stopLoop" value="true"/>
                                         </c:if>
                                     </c:if>
@@ -153,15 +170,15 @@
                                                         <c:forEach var="role" items="${account.roles}">
                                                             <c:if test="${!stopLoop3}">
                                                                 <c:if test="${(role.rid == 6) || (role.rid == 5) || (role.rid == 7)}">
-                                                                <td>
-                                                            <c:if test="${item.isActive}">
-                                                                <span class="badge badge-success">Active</span>
-                                                            </c:if>
-                                                            <c:if test="${!item.isActive}">
-                                                                <span class="badge badge-danger">Inactive</span>
-                                                            </c:if>
-                                                        </td>
-                                                                <td style="vertical-align: middle;"><button class="btn" style="border: 0.2px solid black;float: right;" onclick="showEditForm(${item.ploid}, ${curid})">Edit</button></td>
+                                                                    <td>
+                                                                        <c:if test="${item.isActive}">
+                                                                            <span class="badge badge-success">Active</span>
+                                                                        </c:if>
+                                                                        <c:if test="${!item.isActive}">
+                                                                            <span class="badge badge-danger">Inactive</span>
+                                                                        </c:if>
+                                                                    </td>
+                                                                    <td style="vertical-align: middle;"><button class="btn" style="border: 0.2px solid black;float: right;" onclick="showEditPlo(${item.ploid}, ${curid})">Edit</button></td>
                                                                     <c:set var="stopLoop3" value="true"/>
                                                                 </c:if>
                                                             </c:if>
@@ -201,9 +218,12 @@
         <!-- Template Javascript -->
         <script src="fe/js/main.js"></script>
         <script>
-                                                function showEditForm(id, curid) {
-                                                    window.location.href = '<%= request.getContextPath() %>/curriculum-ploEdit?ploid=' + id +'&curid='+curid;
-                                                }
+                                                                        function showEditPlo(id, curid) {
+                                                                            window.location.href = '<%= request.getContextPath() %>/curriculum-ploEdit?ploid=' + id + '&curid=' + curid;
+                                                                        }
+                                                                        function showAddPlo(curid) {
+                                                                            window.location.href = '<%= request.getContextPath() %>/curriculum-ploAdd?curid=' + curid;
+                                                                        }
         </script>
     </body>
 
