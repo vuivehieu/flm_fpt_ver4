@@ -63,24 +63,24 @@ public class SettingListController extends HttpServlet {
         String filterType = "User Role";
         int filterStatus = 3;
         if(request.getParameter("pageNo")!=null){
-                   if(Integer.parseInt(request.getParameter("pageNo"))!=0){
-            pageNo = Integer.parseInt(request.getParameter("pageNo"));
-        } 
+            if(Integer.parseInt(request.getParameter("pageNo"))!=0){
+                 pageNo = Integer.parseInt(request.getParameter("pageNo"));
+            } 
         }
         if(request.getParameter("filterType")!=null){
-                if(!request.getParameter("filterType").equals("User Role")||!request.getParameter("filterType").equals("")){
-            filterType = request.getParameter("filterType");
-        }
+            if(!request.getParameter("filterType").equals("User Role")||!request.getParameter("filterType").equals("")){
+                filterType = request.getParameter("filterType");
+            }
         }
         if(request.getParameter("filterStatus")!=null){
-                    if(!(request.getParameter("filterStatus").equals(""))||Integer.parseInt(request.getParameter("filterStatus"))!=3){
-            filterStatus = Integer.parseInt(request.getParameter("filterStatus"));
-        }
+            if(!(request.getParameter("filterStatus").equals(""))||Integer.parseInt(request.getParameter("filterStatus"))!=3){
+                filterStatus = Integer.parseInt(request.getParameter("filterStatus"));
+            }
         }
         if(request.getParameter("search")!=null){
-                  if(!request.getParameter("search").equals("")){
-            search = request.getParameter("search");
-        }  
+            if(!request.getParameter("search").equals("")){
+                search = request.getParameter("search");
+            }  
         }
         PaginationModel paginationModel = new PaginationModel(pageNo,pageSize, search, filterStatus,filterType, true);
         RoleDAO roleDAO = new RoleDAO();

@@ -51,7 +51,7 @@
                             <div class="col-lg-12">
                                 <div class="row align-items-center">
                                     <div class="col-sm-12 col-md-6">
-                                        <div class="input-group" style="position: relative;width: 25%;margin-left: auto;margin-bottom: 15px;float: left">
+<!--                                        <div class="input-group" style="position: relative;width: 25%;margin-left: auto;margin-bottom: 15px;float: left">
                                             <select class="form-control js-basic-example2" id="filterType" style="margin-left:-2%;background: #cfcfcf;border-radius: 20px;padding: 10px 20px;">
                                                 <option value="User Role" selected>User Role</option>
                                             </select>
@@ -66,7 +66,7 @@
                                             </select>
                                             <div class="input-group-append" style="position: absolute;right: 0;z-index: 10;">
                                             </div>
-                                        </div>
+                                        </div>-->
                                     </div>
                                     <div class="col-sm-12 col-md-6">
                                         <div class="input-group" style="position: relative;width: 75%;margin-left: auto;margin-bottom: 15px;">
@@ -111,16 +111,8 @@
                                                         </td>
                                                         <td>${item.displayOrder}</td>
                                                         <td>
-                                                            <c:if test="${item.status == 1}">
-                                                                <span class="badge badge-success">Active</span>
-                                                            </c:if>
-                                                            <c:if test="${item.status == 0}">
-                                                                <span class="badge badge-danger">Inactive</span>
-                                                            </c:if>
-                                                        </td>
-                                                        <td>
                                                             <button id="btnDetail"
-                                                                    data-status="${item.status}" data-type="${item.type}" data-name="${item.rname}" data-display="${item.displayOrder}" data-itemid="${item.rid}" data-description="${item.description}"
+                                                                    data-type="${item.type}" data-name="${item.rname}" data-display="${item.displayOrder}" data-itemid="${item.rid}" data-description="${item.description}"
                                                                     data-target="#editModal"
                                                                     data-toggle="modal"
                                                                     aria-hidden="true"
@@ -129,18 +121,6 @@
                                                                     class="material-icons">edit</i>
                                                                 <div class="ripple-container"></div>
                                                             </button>
-                                                            <button
-                                                                class="btn text-danger rounded-circle m-0 btn-sm btn-icon"
-                                                                style="height: 0px !important;" onclick="document.getElementById('deleteLink').href = 'admin-change-setting-status?id=${item.rid}&status=${item.status==0? 1 : 0}';
-                                                                        openModal(${result.id})">
-                                                                <c:if test="${item.status== 1}">
-                                                                    <i class="material-icons">toggle_off</i>
-                                                                </c:if>
-                                                                <c:if test="${item.status== 0}">
-                                                                    <i class="material-icons">toggle_on</i>
-                                                                </c:if>
-                                                            </button>
-
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
@@ -189,32 +169,9 @@
                             </div>
                         </div>
                     </div>
-                    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="ModalDelete" role="dialog"
-                         tabindex="-1">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header" style="background: #304156;padding: 10px;">
-                                    <h5 class="modal-title" id="exampleModalLabel" style="color: white">
-                                        Change Setting Status</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true" style="color: white">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <h4>Are you sure want to change status?</h4>
-                                </div>
-                                <div class="modal-footer" style="margin: 0 auto; display: flex ; justify-content: space-between">
-                                    <a id="deleteLink" class="btn btn-opacity-danger" href="#">
-                                        <%--              <button class="btn btn-opacity-danger " style="margin-left: 12px;" type="button">--%>
-                                        Change Status
-                                        <%--              </button>--%>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
+                    <!--modal add-->
                     <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <form id="formAdd" class="needs-validation" method="POST" action="add-setting">
@@ -248,258 +205,256 @@
                                             <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Type</label>
                                             <div class="form-group col-md-12">
                                                 <select class="form-control js-basic-example2" id="inputType" name="inputType" style="width: 100%" required>
-                                                    <option value="0">User Role</option>
+                                                    <option value="0" selected>User Role</option>
+                                                    <option value="1">Admin Role</option>
                                                 </select>
                                             </div>
 
-                                            <div class="col-md-12 form-group">
+<!--                                            <div class="col-md-12 form-group">
                                                 <label class="ml-2" style="font-size: 15px">Status</label>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <div class="input-group">
                                                     <label for="inputStatus1" class="ml-2" style="font-size: 15px">Active</label>
                                                     <input type="radio" value="1" class="form-control mt-2" id="inputStatus1" name="inputStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
-                                                        <label for="inputStatus2" class="ml-2" style="font-size: 15px">Inactive</label>
-                                                        <input type="radio" value="0" class="form-control mt-2" id="inputStatus2" name="inputStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
-                                                            </div>                                    
-                                                            </div>
-                                                            </div>
-                                                            </div>
-                                                            <div class="modal-footer" style="margin: 0 auto; display: flex; justify-content: center" >
-                                                                <button class="btn btn-opacity-success" type="submit">Save</button>
-                                                            </div>
-                                                            </form>
-                                                            </div>
-                                                            </div>
-                                                            </div>
-                                                            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <label for="inputStatus2" class="ml-2" style="font-size: 15px">Inactive</label>
+                                                    <input type="radio" value="0" class="form-control mt-2" id="inputStatus2" name="inputStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
+                                                </div>                                    
+                                            </div>-->
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer" style="margin: 0 auto; display: flex; justify-content: center" >
+                                        <button class="btn btn-opacity-success" type="submit">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!--modal edit-->
+                    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <form id="formEdit" class="needs-validation" method="POST" action="update-setting">
+                                    <div class="modal-header" style="background: #304156;padding: 10px;">
+                                        <h5 class="modal-title" id="exampleModalAdd" style="color: white">Edit Setting</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" style="color: white">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="form-group col-md-12">
+                                                <label for="updateName" class="ml-2" style="font-size: 15px; color:black">Name</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control mt-2" id="updateName" placeholder="Input Name" value="" name="updateName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                    <input type="text" class="form-control mt-2" id="updateId" placeholder="Input Username" value="" name="updateId" aria-describedby="inputGroupPrepend" style="font-size: 14px;display: none">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label for="updateDisplayOrder" class="ml-2" style="font-size: 15px; color:black">Display Order</label>
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control mt-2" id="updateDisplayOrder" placeholder="Input Display Order" value="" name="updateDisplayOrder" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
 
-                                                                <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
-                                                                        <form id="formEdit" class="needs-validation" method="POST" action="update-setting">
-                                                                            <div class="modal-header" style="background: #304156;padding: 10px;">
-                                                                                <h5 class="modal-title" id="exampleModalAdd" style="color: white">Edit Setting</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true" style="color: white">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <div class="row">
-                                                                                    <div class="form-group col-md-12">
-                                                                                        <label for="updateName" class="ml-2" style="font-size: 15px; color:black">Name</label>
-                                                                                        <div class="input-group">
-                                                                                            <input type="text" class="form-control mt-2" id="updateName" placeholder="Input Name" value="" name="updateName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
-                                                                                                <input type="text" class="form-control mt-2" id="updateId" placeholder="Input Username" value="" name="updateId" aria-describedby="inputGroupPrepend" style="font-size: 14px;display: none">
-                                                                                                    </div>
-                                                                                                    </div>
-                                                                                                    <div class="form-group col-md-12">
-                                                                                                        <label for="updateDisplayOrder" class="ml-2" style="font-size: 15px; color:black">Display Order</label>
-                                                                                                        <div class="input-group">
-                                                                                                            <input type="number" class="form-control mt-2" id="updateDisplayOrder" placeholder="Input Display Order" value="" name="updateDisplayOrder" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label for="updateDescription" class="ml-2" style="font-size: 15px; color:black">Description</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control mt-2" id="updateDescription" placeholder="Input Description" value="" name="updateDescription" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
 
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <div class="form-group col-md-12">
-                                                                                                        <label for="updateDescription" class="ml-2" style="font-size: 15px; color:black">Description</label>
-                                                                                                        <div class="input-group">
-                                                                                                            <input type="text" class="form-control mt-2" id="updateDescription" placeholder="Input Description" value="" name="updateDescription" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                </div>
+                                            </div>
+                                            <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Type</label>
+                                            <div class="form-group col-md-12">
+                                                <select class="form-control js-basic-example2" id="updateType" name="updateType" style="width: 100%" required>
+                                                    <option value="0" selected>User Role</option>
+                                                    <option value="1">Admin Role</option>
+                                                </select>
+                                            </div>
 
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Type</label>
-                                                                                                    <div class="form-group col-md-12">
-                                                                                                        <select class="form-control js-basic-example2" id="updateType" name="updateType" style="width: 100%" required>
-                                                                                                            <option value="0" selected>User Role</option>
-                                                                                                        </select>
-                                                                                                    </div>
+<!--                                            <div class="col-md-12 form-group">
+                                                <label class="ml-2" style="font-size: 15px">Status</label>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <div class="input-group">
+                                                    <label for="updateStatus1" class="ml-2" style="font-size: 15px">Active</label>
+                                                    <input type="radio" value="1" class="form-control mt-2" id="updateStatus1" name="updateStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
+                                                    <label for="updateStatus2" class="ml-2" style="font-size: 15px">Inactive</label>
+                                                    <input type="radio" value="0" class="form-control mt-2" id="updateStatus2" name="updateStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
+                                                </div>                                    
+                                            </div>-->
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer" style="margin: 0 auto; display: flex; justify-content: center" >
+                                        <button class="btn btn-opacity-success" type="submit">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                                                                                                    <div class="col-md-12 form-group">
-                                                                                                        <label class="ml-2" style="font-size: 15px">Status</label>
-                                                                                                    </div>
-                                                                                                    <div class="form-group col-md-12">
-                                                                                                        <div class="input-group">
-                                                                                                            <label for="updateStatus1" class="ml-2" style="font-size: 15px">Active</label>
-                                                                                                            <input type="radio" value="1" class="form-control mt-2" id="updateStatus1" name="updateStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
-                                                                                                                <label for="updateStatus2" class="ml-2" style="font-size: 15px">Inactive</label>
-                                                                                                                <input type="radio" value="0" class="form-control mt-2" id="updateStatus2" name="updateStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
-                                                                                                                    </div>                                    
-                                                                                                                    </div>
-                                                                                                                    </div>
-                                                                                                                    </div>
-                                                                                                                    <div class="modal-footer" style="margin: 0 auto; display: flex; justify-content: center" >
-                                                                                                                        <button class="btn btn-opacity-success" type="submit">Save</button>
-                                                                                                                    </div>
-                                                                                                                    </form>
-                                                                                                                    </div>
-                                                                                                                    </div>
-                                                                                                                    </div>
-                                                                                                                    <!---->
-                                                                                                                    <!-- End:: Footer-->
-                                                                                                                    </div>
-                                                                                                                    <!-- End::Main header-->
-                                                                                                                    </div>
-                                                                                                                    </div>
+    <script src="admin-template/js/vendors.bundle.min.js"></script>
+    <script src="admin-template/js/main.bundle.min.js"></script>
+    <script src="admin-template/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="admin-template/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="admin-template/js/pages/datatables/basicDatatable.min.js"></script>
+    <script type="text/javascript">
+        let currentIndex;
+        let oldText;
+        $(".sort-handler").click(function (e) {
+            const index = $(this).index();
+            if (index != currentIndex || !currentIndex) {
+                if (oldText) {
+                    $($('.sort-handler').get(currentIndex)).html(oldText);
+                }
+                currentIndex = index;
+            }
+            if (!$(this).text().includes(oldText) || !oldText) {
+                oldText = $(this).text();
+            }
+            // if (oldText.include('&#8593;')){
+            //     oldText.replace('&#8593;', '');
+            // } else if (oldText.include('&#8595;')){
+            //     oldText.replace('&#8595;', '');
+            // }
+            $(this).html(oldText + ' &#8593;');
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById("example");
+            switching = true;
+            //Set the sorting direction to ascending:
+            dir = "asc";
+            /*Make a loop that will continue until
+             no switching has been done:*/
+            while (switching) {
+                //start by saying: no switching is done:
+                switching = false;
+                rows = table.rows;
+                /*Loop through all table rows (except the
+                 first, which contains table headers):*/
+                for (i = 1; i < (rows.length - 1); i++) {
+                    //start by saying there should be no switching:
+                    shouldSwitch = false;
+                    /*Get the two elements you want to compare,
+                     one from current row and one from the next:*/
+                    x = rows[i].getElementsByTagName("TD")[index];
+                    y = rows[i + 1].getElementsByTagName("TD")[index];
+                    /*check if the two rows should switch place,
+                     based on the direction, asc or desc:*/
+                    if (dir == "asc") {
+                        if (new Intl.Collator().compare(x.innerHTML.toLowerCase(), y.innerHTML.toLowerCase()) == 1) {
+                            //if so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (new Intl.Collator().compare(x.innerHTML.toLowerCase(), y.innerHTML.toLowerCase()) == -1) {
+                            //if so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    /*If a switch has been marked, make the switch
+                     and mark that a switch has been done:*/
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    //Each time a switch is done, increase this count by 1:
+                    switchcount++;
+                } else {
+                    /*If no switching has been done AND the direction is "asc",
+                     set the direction to "desc" and run the while loop again.*/
+                    if (switchcount == 0 && dir == "asc") {
+                        $(this).html(oldText + ' &#8595;');
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        });
+        $(document).ready(function () {
+            $(".js-basic-example2").select2({
+                theme: "classic"
+            });
+        });
+        function onPage(pageNo, pageSize, search, filterType, filterStatus) {
+            if (search === '') {
+                if (filterType === 'User Role') {
+                    window.location.href = `admin-settings?pageNo=` + pageNo + `&filterStatus=` + filterStatus;
+                }
+                if (filterType === 'User Role') {
+                    window.location.href = `admin-settings?pageNo=` + pageNo + `&filterType=` + filterType;
+                }
+                if (filterType === 'User Role' && filterStatus === 0) {
+                    window.location.href = `admin-settings?pageNo=` + pageNo;
+                }
+                window.location.href = `admin-settings?pageNo=` + pageNo + `&filterType=` + filterType + `&filterStatus=` + filterStatus;
+            } else {
+                window.location.href = `admin-settings?pageNo=` + pageNo + `&filterType=` + filterType + `&filterStatus=` + filterStatus + `&search=` + search;
+            }
+        }
+        function filter() {
+            const searchValue = "${search}";
+            const filterType = document.getElementById("filterType").value;
+            const filterStatus = document.getElementById("filterStatus").value;
+            if (searchValue === '') {
+                if (filterType !== 'User Role' && filterStatus !== 3) {
+                    window.location.href = `admin-settings?pageNo=1&filterType=` + filterType + `&filterStatus=` + filterStatus;
+                } else if (filterType !== 'User Role') {
+                    window.location.href = `admin-settings?pageNo=1&filterType=` + filterType;
+                } else if (filterStatus !== 3) {
+                    window.location.href = `admin-settings?pageNo=1&filterStatus=` + filterStatus;
+                }
+            } else {
+                if (filterType !== 'User Role' && filterStatus !== 3) {
+                    window.location.href = `admin-settings?pageNo=1&filterType=` + filterType + `&filterStatus=` + filterStatus + '&search=' + searchValue;
+                } else if (filterType !== 'User Role') {
+                    window.location.href = `admin-settings?pageNo=1&filterType=` + filterType + '&search=' + searchValue;
+                } else if (filterStatus !== 3) {
+                    window.location.href = `admin-settings?pageNo=1&filterStatus=` + filterStatus + '&search=' + searchValue;
+                }
+            }
+        }
+        function search() {
+            const filterType = "${filterType}";
+            const filterStatus = "${filterStatus}";
+            const searchValue = document.getElementById("textSearch").value;
+            if (searchValue === '') {
+                window.location.href = `admin-settings?filterType=` + filterType + `&filterStatus=` + filterStatus;
+            } else
+                window.location.href = `admin-settings?filterType=` + filterType + `&filterStatus=` + filterStatus + `&search=` + searchValue;
+        }
+        $('#editModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var status = button.data('status'); // Extract value from data-* attributes
+            var type = button.data('type');
+            var description = button.data('description');
+            var itemid = button.data('itemid');
+            var name = button.data('name');
+            var display = button.data('display');
+            // Set the selected value of the "statusRadio" radio buttons based on the "data-status" attribute
+            if (status === 1) {
+                $('#updateStatus1').prop('checked', 'checked');
+            } else if (status === 2) {
+                $('#updateStatus3').prop('checked', 'checked');
+            } else {
+                $('#updateStatus2').prop('checked', 'checked');
+            }
+            $('#updateName').attr('value', name);
+            $('#updateDescription').attr('value', description);
+            $('#updateDisplayOrder').attr('value', display);
+            $('#updateId').attr('value', itemid);
+            $('#updateType').val(type);
 
-                                                                                                                    <script src="admin-template/js/vendors.bundle.min.js"></script>
-                                                                                                                    <script src="admin-template/js/main.bundle.min.js"></script>
-                                                                                                                    <script src="admin-template/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-                                                                                                                    <script src="admin-template/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-                                                                                                                    <script src="admin-template/js/pages/datatables/basicDatatable.min.js"></script>
-                                                                                                                    <script type="text/javascript">
-                                                    let currentIndex;
-                                                    let oldText;
-                                                    $(".sort-handler").click(function (e) {
-                                                        const index = $(this).index();
-                                                        if (index != currentIndex || !currentIndex) {
-                                                            if (oldText) {
-                                                                $($('.sort-handler').get(currentIndex)).html(oldText);
-                                                            }
-                                                            currentIndex = index;
-                                                        }
-                                                        if (!$(this).text().includes(oldText) || !oldText) {
-                                                            oldText = $(this).text();
-                                                        }
-                                                        // if (oldText.include('&#8593;')){
-                                                        //     oldText.replace('&#8593;', '');
-                                                        // } else if (oldText.include('&#8595;')){
-                                                        //     oldText.replace('&#8595;', '');
-                                                        // }
-                                                        $(this).html(oldText + ' &#8593;');
-                                                        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-                                                        table = document.getElementById("example");
-                                                        switching = true;
-                                                        //Set the sorting direction to ascending:
-                                                        dir = "asc";
-                                                        /*Make a loop that will continue until
-                                                         no switching has been done:*/
-                                                        while (switching) {
-                                                            //start by saying: no switching is done:
-                                                            switching = false;
-                                                            rows = table.rows;
-                                                            /*Loop through all table rows (except the
-                                                             first, which contains table headers):*/
-                                                            for (i = 1; i < (rows.length - 1); i++) {
-                                                                //start by saying there should be no switching:
-                                                                shouldSwitch = false;
-                                                                /*Get the two elements you want to compare,
-                                                                 one from current row and one from the next:*/
-                                                                x = rows[i].getElementsByTagName("TD")[index];
-                                                                y = rows[i + 1].getElementsByTagName("TD")[index];
-                                                                /*check if the two rows should switch place,
-                                                                 based on the direction, asc or desc:*/
-                                                                if (dir == "asc") {
-                                                                    if (new Intl.Collator().compare(x.innerHTML.toLowerCase(), y.innerHTML.toLowerCase()) == 1) {
-                                                                        //if so, mark as a switch and break the loop:
-                                                                        shouldSwitch = true;
-                                                                        break;
-                                                                    }
-                                                                } else if (dir == "desc") {
-                                                                    if (new Intl.Collator().compare(x.innerHTML.toLowerCase(), y.innerHTML.toLowerCase()) == -1) {
-                                                                        //if so, mark as a switch and break the loop:
-                                                                        shouldSwitch = true;
-                                                                        break;
-                                                                    }
-                                                                }
-                                                            }
-                                                            if (shouldSwitch) {
-                                                                /*If a switch has been marked, make the switch
-                                                                 and mark that a switch has been done:*/
-                                                                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                                                                switching = true;
-                                                                //Each time a switch is done, increase this count by 1:
-                                                                switchcount++;
-                                                            } else {
-                                                                /*If no switching has been done AND the direction is "asc",
-                                                                 set the direction to "desc" and run the while loop again.*/
-                                                                if (switchcount == 0 && dir == "asc") {
-                                                                    $(this).html(oldText + ' &#8595;');
-                                                                    dir = "desc";
-                                                                    switching = true;
-                                                                }
-                                                            }
-                                                        }
-                                                    });
-                                                    $(document).ready(function () {
-                                                        $(".js-basic-example2").select2({
-                                                            theme: "classic"
-                                                        });
-                                                    });
-                                                    function onPage(pageNo, pageSize, search, filterType, filterStatus) {
-                                                        if (search === '') {
-                                                            if (filterType === 'User Role') {
-                                                                window.location.href = `admin-settings?pageNo=` + pageNo + `&filterStatus=` + filterStatus;
-                                                            }
-                                                            if (filterType === 'User Role') {
-                                                                window.location.href = `admin-settings?pageNo=` + pageNo + `&filterType=` + filterType;
-                                                            }
-                                                            if (filterType === 'User Role' && filterStatus === 0) {
-                                                                window.location.href = `admin-settings?pageNo=` + pageNo;
-                                                            }
-                                                            window.location.href = `admin-settings?pageNo=` + pageNo + `&filterType=` + filterType + `&filterStatus=` + filterStatus;
-                                                        } else {
-                                                            window.location.href = `admin-settings?pageNo=` + pageNo + `&filterType=` + filterType + `&filterStatus=` + filterStatus + `&search=` + search;
-                                                        }
-                                                    }
-                                                    function filter() {
-                                                        const searchValue = "${search}";
-                                                        const filterType = document.getElementById("filterType").value;
-                                                        const filterStatus = document.getElementById("filterStatus").value;
-                                                        if (searchValue === '') {
-                                                            if (filterType !== 'User Role' && filterStatus !== 3) {
-                                                                window.location.href = `admin-settings?pageNo=1&filterType=` + filterType + `&filterStatus=` + filterStatus;
-                                                            } else if (filterType !== 'User Role') {
-                                                                window.location.href = `admin-settings?pageNo=1&filterType=` + filterType;
-                                                            } else if (filterStatus !== 3) {
-                                                                window.location.href = `admin-settings?pageNo=1&filterStatus=` + filterStatus;
-                                                            }
-                                                        } else {
-                                                            if (filterType !== 'User Role' && filterStatus !== 3) {
-                                                                window.location.href = `admin-settings?pageNo=1&filterType=` + filterType + `&filterStatus=` + filterStatus + '&search=' + searchValue;
-                                                            } else if (filterType !== 'User Role') {
-                                                                window.location.href = `admin-settings?pageNo=1&filterType=` + filterType + '&search=' + searchValue;
-                                                            } else if (filterStatus !== 3) {
-                                                                window.location.href = `admin-settings?pageNo=1&filterStatus=` + filterStatus + '&search=' + searchValue;
-                                                            }
-                                                        }
-                                                    }
-                                                    function search() {
-                                                        const filterType = "${filterType}";
-                                                        const filterStatus = "${filterStatus}";
-                                                        const searchValue = document.getElementById("textSearch").value;
-                                                        if (searchValue === '') {
-                                                            window.location.href = `admin-settings?filterType=` + filterType + `&filterStatus=` + filterStatus;
-                                                        } else
-                                                            window.location.href = `admin-settings?filterType=` + filterType + `&filterStatus=` + filterStatus + `&search=` + searchValue;
-                                                    }
-                                                    $('#editModal').on('show.bs.modal', function (event) {
-                                                        var button = $(event.relatedTarget); // Button that triggered the modal
-                                                        var status = button.data('status'); // Extract value from data-* attributes
-                                                        var type = button.data('type');
-                                                        var description = button.data('description');
-                                                        var itemid = button.data('itemid');
-                                                        var name = button.data('name');
-                                                        var display = button.data('display');
-                                                        // Set the selected value of the "statusRadio" radio buttons based on the "data-status" attribute
-                                                        if (status === 1) {
-                                                            $('#updateStatus1').prop('checked', 'checked');
-                                                        } else if (status === 2) {
-                                                            $('#updateStatus3').prop('checked', 'checked');
-                                                        } else {
-                                                            $('#updateStatus2').prop('checked', 'checked');
-                                                        }
-                                                        $('#updateName').attr('value', name);
-                                                        $('#updateDescription').attr('value', description);
-                                                        $('#updateDisplayOrder').attr('value', display);
-                                                        $('#updateId').attr('value', itemid);
-                                                        $('#updateType').val(type);
+        });
+        function openModal(id) {
+            $("#ModalDelete").modal('show');
+        };
+    </script>
+</body>
 
-                                                    });
-                                                    function openModal(id) {
-                                                        $("#ModalDelete").modal('show');
-                                                    }
-                                                    ;
-                                                                                                                    </script>
-                                                                                                                    </body>
-
-
-                                                                                                                    </html>
+</html>

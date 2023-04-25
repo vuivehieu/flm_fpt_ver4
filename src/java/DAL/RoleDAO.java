@@ -91,7 +91,7 @@ public class RoleDAO extends DBContext {
             ResultSet rs = st.executeQuery();
 
             while (rs.next()) {
-                Role role = new Role(rs.getInt("rid"), rs.getString("rname"), rs.getInt("status"), rs.getInt("display_order"), rs.getString("description"), rs.getString("type"));
+                Role role = new Role(rs.getInt("rid"), rs.getString("rname"), rs.getInt("display_order"), rs.getString("description"), rs.getString("type"));
                 list.add(role);
             }
 
@@ -162,7 +162,7 @@ public class RoleDAO extends DBContext {
                     + "VALUES\n"
                     + "(null,\n"
                     + "?,\n"
-                    + "?,\n"
+//                    + "?,\n"
                     + "?,\n"
                     + "?,\n"
                     + "?);";
@@ -175,7 +175,7 @@ public class RoleDAO extends DBContext {
 
             st.setInt(2, r.getDisplayOrder());
             st.setString(3, r.getDescription());
-            st.setString(4, "User Role");
+            st.setString(4, r.getType());
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println("RoleDAO -> insertRole(): " + e);
@@ -187,7 +187,7 @@ public class RoleDAO extends DBContext {
             String sql = "UPDATE `swp391_bl5_g6`.`role`\n"
                     + "SET\n"
                     + "`rname` = ?,\n"
-                    + "`status` = ?,\n"
+                    + "`type` = ?,\n"
                     + "`display_order` = ?,\n"
                     + "`description` = ? \n"
                     + "WHERE `rid` = ?;";
@@ -198,10 +198,10 @@ public class RoleDAO extends DBContext {
 //            st.setString(4, r.getDescription());
 //            st.setInt(5, r.getRid());
 
-
-            st.setInt(2, r.getDisplayOrder());
-            st.setString(3, r.getDescription());
-            st.setInt(4, r.getRid());
+            st.setString(2, r.getType());
+            st.setInt(3, r.getDisplayOrder());
+            st.setString(4, r.getDescription());
+            st.setInt(5, r.getRid());
 
             st.executeUpdate();
         } catch (SQLException e) {

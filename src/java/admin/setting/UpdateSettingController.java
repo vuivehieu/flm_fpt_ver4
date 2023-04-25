@@ -74,33 +74,39 @@ public class UpdateSettingController extends HttpServlet {
         String name = request.getParameter("updateName");
         String description = request.getParameter("updateDescription");
         int display = Integer.parseInt(request.getParameter("updateDisplayOrder"));
-        int status = Integer.parseInt(request.getParameter("updateStatus"));
+        int type = Integer.parseInt(request.getParameter("updateType"));
         Role r = new Role();
         r.setRid(id);
         r.setDescription(description);
         r.setDisplayOrder(display);
         r.setRname(name);
         //r.setStatus(status);
-        r.setType("User Role");
-        roleDao.updateRole(r);
-        int roleId = 0;
-        String page ="";
-        Cookie[] cookies = request.getCookies();
-                if(cookies!=null){
-            for(Cookie cookie:cookies){
-                if(cookie.getName().equals("userRole")){
-                    roleId = Integer.parseInt(cookie.getValue());
-                }
-            }
+//        r.setType("User Role");
+        if(type == 0){
+            r.setType("User Role");
+        } else {
+            r.setType("Admin Role");
         }
-                if(roleId == id){
-                    if(status == 0){
-                        page = "/logout";
-                    }
-                }else{
-                        page = "/admin-settings";
-                    }
-        response.sendRedirect(request.getContextPath() + page);
+        roleDao.updateRole(r);
+//        int roleId = 0;
+//        String page ="";
+//        Cookie[] cookies = request.getCookies();
+//                if(cookies!=null){
+//            for(Cookie cookie:cookies){
+//                if(cookie.getName().equals("userRole")){
+//                    roleId = Integer.parseInt(cookie.getValue());
+//                }
+//            }
+//        }
+//        if(roleId == id){
+//            if(status == 0){
+//                page = "/logout";
+//            }
+//        }else{
+//                page = "/admin-settings";
+//        }
+//        response.sendRedirect(request.getContextPath() + page);
+        response.sendRedirect(request.getContextPath() + "/admin-settings");
     }
 
     /**

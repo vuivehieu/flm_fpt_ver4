@@ -72,13 +72,18 @@ public class AddSettingController extends HttpServlet {
         String name = request.getParameter("inputName");
         String description = request.getParameter("inputDescription");
         int display = Integer.parseInt(request.getParameter("inputDisplay"));
-        int status = Integer.parseInt(request.getParameter("inputStatus"));
+        int type = Integer.parseInt(request.getParameter("inputType"));
         Role r = new Role();
         r.setDescription(description);
         r.setDisplayOrder(display);
         r.setRname(name);
-        //r.setStatus(status);
-        r.setType("User Role");
+        
+        if(type == 0){
+            r.setType("User Role");
+        } else {
+            r.setType("Admin Role");
+        }
+        
         roleDao.insertRole(r);
         response.sendRedirect(request.getContextPath() + "/admin-settings");
     }
