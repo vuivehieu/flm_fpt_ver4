@@ -124,7 +124,7 @@
                             <div class="form-group col-md-12">
                                 <label for="inputDescription" class="ml-2" style="font-size: 15px; color:black">Description</label>
                                 <div class="input-group">
-                                    <textarea type="text" col="2" class="form-control mt-2" rows="10" cols="70" id="inputDescription" placeholder="Input Description" value="" name="inputDescription" aria-describedby="inputGroupPrepend" required style="font-size: 15px;resize: none;"></textarea>
+                                    <textarea type="text" col="2" class="form-control mt-2" rows="10" cols="70" id="inputDescription" placeholder="Input Description" value="" name="inputDescription" aria-describedby="inputGroupPrepend" required style="font-size: 15px;height:150px;"></textarea>
 
                                 </div>
                             </div>
