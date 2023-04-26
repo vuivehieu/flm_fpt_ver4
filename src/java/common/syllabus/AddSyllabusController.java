@@ -60,6 +60,7 @@ public class AddSyllabusController extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {        
+        request.setAttribute("subjects", new DAO().getAllSubject());
         request.getRequestDispatcher("gui/common/subject/addSyllabus.jsp").forward(request, response);
     } 
 
@@ -78,6 +79,12 @@ public class AddSyllabusController extends HttpServlet{
         Syllabus syllabus = new Syllabus();
         String nameEn = request.getParameter("inputNameEn");
         String nameVi = request.getParameter("inputNameVi");
+        String subjectCode = "";
+        if(!request.getParameter("inputSubjectCode").equals("none")){
+            subjectCode = request.getParameter("inputSubjectCode");
+        }else{
+            subjectCode = null;
+        }
         check = syllabusDAO.checkNameEn(nameEn);
         if(!check){
             check = syllabusDAO.checkNameVi(nameVi);
@@ -86,7 +93,7 @@ public class AddSyllabusController extends HttpServlet{
             request.setAttribute("errorMessage", "Name already exist!!!");
             request.getRequestDispatcher("gui/common/subject/addSyllabus.jsp").forward(request, response);
         }else{
-         String degree = request.getParameter("inputDegree");
+        String degree = request.getParameter("inputDegree");
         String timeAllocation = request.getParameter("inputTime");
         String description = request.getParameter("inputDescription");
         String task = request.getParameter("inputTask");
@@ -95,6 +102,7 @@ public class AddSyllabusController extends HttpServlet{
         syllabus.setAccountID(((Account) session.getAttribute("account")).getAccountID());
         syllabus.setDegreeLevel(degree);
         syllabus.setDescription(description);
+        syllabus.setSubjectCode(subjectCode);
         syllabus.setStudentTask(task);
         syllabus.setSlbName_EN(nameEn);
         syllabus.setSlbName_VI(nameVi);

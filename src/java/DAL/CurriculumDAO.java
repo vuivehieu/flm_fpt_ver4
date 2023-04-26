@@ -201,8 +201,8 @@ public class CurriculumDAO extends DBContext {
             String sql = "INSERT INTO `swp391_bl5_g6`.`curriculum`\n"
                     + "(`curid`,\n"
                     + "`curCode`,\n"
-                    + "`majorID`,\n"
-                    + "`decisionNo`,\n"
+//                    + "`majorID`,\n"
+//                    + "`decisionNo`,\n"
                     + "`curName_EN`,\n"
                     + "`curName_VI`,\n"
                     + "`description`,\n"
@@ -213,8 +213,8 @@ public class CurriculumDAO extends DBContext {
                     + "(null,\n"
                     + "?,\n"
                     + "?,\n"
-                    + "?,\n"
-                    + "?,\n"
+//                    + "?,\n"
+//                    + "?,\n"
                     + "?,\n"
                     + "?,\n"
                     + "?,\n"
@@ -222,14 +222,14 @@ public class CurriculumDAO extends DBContext {
                     + "?);";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, curriculum.getCurCode());
-            ps.setInt(2, curriculum.getMajor().getMajorID());
-            ps.setString(3, curriculum.getDecision().getDecisionNo());
-            ps.setString(4, curriculum.getCurName_EN());
-            ps.setString(5, curriculum.getCurName_VI());
-            ps.setString(6, curriculum.getDescription());
-            ps.setBoolean(7, curriculum.isIsApproved());
-            ps.setBoolean(8, curriculum.isIsActive());
-            ps.setString(9, curriculum.getImage());
+//            ps.setInt(2, null);
+//            ps.setString(3, null);
+            ps.setString(2, curriculum.getCurName_EN());
+            ps.setString(3, curriculum.getCurName_VI());
+            ps.setString(4, curriculum.getDescription());
+            ps.setBoolean(5, curriculum.isIsApproved());
+            ps.setBoolean(6, curriculum.isIsActive());
+            ps.setString(7, curriculum.getImage());
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println("CurriculumDAO -> UpdateCurriculum(): " + e);

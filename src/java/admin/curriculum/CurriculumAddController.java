@@ -19,13 +19,18 @@ import model.Major;
  *
  * @author PCM
  */
-@WebServlet(name="CurriculumAddController", urlPatterns={"/add-curriculum"})
-public class CurriculumAddController extends HttpServlet{
-    
-    
+@WebServlet(name = "CurriculumAddController", urlPatterns = {"/add-curriculum"})
+public class CurriculumAddController extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("gui/admin/curriculum/add.jsp").forward(request, response);
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
 //        processRequest(request, response);
         CurriculumDAO dao = new CurriculumDAO();
         Curriculum curriculum = new Curriculum();
@@ -33,14 +38,14 @@ public class CurriculumAddController extends HttpServlet{
         String nameEn = request.getParameter("inputNameEn");
         String nameVi = request.getParameter("inputNameVi");
         String description = request.getParameter("inputDescription");
-        int major = Integer.parseInt(request.getParameter("inputMajor"));
-        String decision = request.getParameter("inputDecision");
+//        int major = Integer.parseInt(request.getParameter("inputMajor"));
+//        String decision = request.getParameter("inputDecision");
         curriculum.setCurName_EN(nameEn);
         curriculum.setCurName_VI(nameVi);
         curriculum.setDescription(description);
         curriculum.setCurCode(code);
-        curriculum.setDecision(new Decision(decision, null, null, null, null, null, null));
-        curriculum.setMajor(new Major(major, null, null, null, null));
+//        curriculum.setDecision(new Decision(decision, null, null, null, null, null, null));
+//        curriculum.setMajor(new Major(major, null, null, null, null));
         curriculum.setIsActive(true);
         curriculum.setIsApproved(false);
         curriculum.setImage("images/ev-bg.jpg");
@@ -48,13 +53,14 @@ public class CurriculumAddController extends HttpServlet{
         response.sendRedirect(request.getContextPath() + "/curriculumList");
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
 }

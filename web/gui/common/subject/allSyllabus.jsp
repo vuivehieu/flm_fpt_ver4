@@ -124,6 +124,15 @@
                                 <th style="vertical-align: middle;">Is Active</th>
                                 <th style="vertical-align: middle;">Is Approved</th>
                                 <th style="vertical-align: middle;">DecisionNo MM/dd/yyyy</th>
+                                <c:set var="stopLoop" value="false"/>
+                            <c:forEach var="role" items="${account.roles}">
+                                <c:if test="${!stopLoop}">
+                                    <c:if test="${(role.rid == 6) || (role.rid == 5) || (role.rid == 7)}">
+                                        <th style="vertical-align: middle;width: 5%">Action</th>
+                                        <c:set var="stopLoop" value="true"/>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
                             </tr>
                         </thead>
                         <tbody>
@@ -152,6 +161,15 @@
 
                                         </a>
                                     </td>
+                                    <c:set var="stopLoop2" value="false"/>
+                            <c:forEach var="role" items="${account.roles}">
+                                <c:if test="${!stopLoop2}">
+                                    <c:if test="${(role.rid == 6) || (role.rid == 5) || (role.rid == 7)}">
+                                            <td style="vertical-align: middle;"><button class="btn" style="border: 0.2px solid black;float: right;" onclick="showEditSyll(${item.slbid})">Edit</button></td>
+                                        <c:set var="stopLoop2" value="true"/>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
                                 </tr>     
                             </c:forEach>
                         </tbody>
@@ -178,6 +196,9 @@
         <jsp:include page="../footer/footer.jsp"/>
 
         <script>
+            function showEditSyll(id){
+                window.location.href='<%= request.getContextPath() %>/syllabusEdit?id='+id;
+            }
             function showAddForm() {
                 window.location.href = '<%= request.getContextPath() %>/syllabusAdd';
             }

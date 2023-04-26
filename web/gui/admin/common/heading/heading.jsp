@@ -47,8 +47,8 @@
                     </div>
                     <div class="navbar-nav" style="margin-right: 3rem;">
                         <c:if test="${account == null}">
-                            <a href="#!" data-toggle="modal" data-target="#modal1" class="nav-item nav-link">Login</a>
-                            <a href="#!" data-toggle="modal" data-target="#modal2" class="nav-item nav-link">Register</a>
+                            <a href="login" data-toggle="modal" data-target="#modal1" class="nav-item nav-link">Login</a>
+                            <a href="register" data-toggle="modal" data-target="#modal2" class="nav-item nav-link">Register</a>
                         </c:if>
                         <c:if test="${account != null}">
                             <div class="dropdown" style="display: flex; align-items: center; margin-left: 2rem;">

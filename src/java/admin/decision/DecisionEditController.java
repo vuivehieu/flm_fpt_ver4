@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.sql.Date;
 import model.Decision;
 import model.PLO;
@@ -92,19 +93,19 @@ public class DecisionEditController extends HttpServlet {
                 decision.setApprovedDate(new java.sql.Date(new java.util.Date().getTime()));
             }
         } else {
-            decision.setIsActive(oldDec.getIsActive());
+            status = oldDec.getIsActive();
         }
-        if (request.getParameter("approveDate") != null) {
+        if (oldDec.getApprovedDate() != null) {
             decision.setApprovedDate(oldDec.getApprovedDate());
         }
         String name = request.getParameter("inputDecisionName");
         String note = request.getParameter("inputNote");
         decision.setDecisionName(name);
         decision.setDecisionNo(decNo);
-        decision.setIsActive(status);
         decision.setNote(note);
+        decision.setIsActive(status);
         decisionDAO.update(decision);
-        response.sendRedirect(request.getContextPath() + "/admin-decisions");
+        response.sendRedirect(request.getContextPath() + "/admin-decisions?message=" + URLEncoder.encode("Update decision successfully", "UTF-8"));
     }
 
     /**

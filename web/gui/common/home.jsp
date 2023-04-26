@@ -168,7 +168,7 @@
                         <div class="card" style="height: 180px; width: 310px">
                             <div class="card-body">
                                 <h5 class="card-title">CRDD Staff Features</h5>
-                                <a href="#" class="d-block text-black pb-2">Manage Curriculum</a>
+                                <a href="curriculumList" class="d-block text-black pb-2">Manage Curriculum</a>
                                 <a href="#" class="d-block text-black pb-2">Manage Subjects</a>
                                 <a href="#" class="d-block text-black pb-2">Manage Syllabus</a>
                                 <a href="#" class="d-block text-black">Material Decision</a>
@@ -179,7 +179,7 @@
                         <div class="card " style="height: 180px; width: 310px">
                             <div class="card-body">
                                 <h5 class="card-title">CRDD Head Features</h5>
-                                <a href="#" class="d-block text-black pb-2">Assign Curriculum</a>
+                                <a href="curriculumList" class="d-block text-black pb-2">Assign Curriculum</a>
                                 <a href="#" class="d-block text-black pb-2">Approve, Disapprove Curriculum</a>
                                 <a href="#" class="d-block text-black ">Approve, Disapprove Syllabus</a>
                                 <a href="admin-decisions" class="d-block text-black ">Approve, Disapprove Decision</a>

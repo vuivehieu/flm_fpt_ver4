@@ -75,7 +75,7 @@
                                 <div class="card-header" style="background: #242939 ;display: flex;justify-content: space-between;">
                                     <h2 class="p-1 m-0 text-16 font-weight-semi " style="color: white">Curriculum Management</h2>
                                     <div style="color: white" class="p-1 m-0 text-16">
-                                        <i class="fa fa-plus" aria-hidden="true" data-toggle="modal" data-target="#addModal" style="cursor: pointer"></i>
+                                        <i class="fa fa-plus" onclick="showAddCurriculum()" style="cursor: pointer"></i>
                                     </div>
                                 </div>
                                 <div class="card">
@@ -110,10 +110,7 @@
                                                         </td>
                                                         <td>
                                                             <button id="btnDetail"
-                                                                    data-id="${item.curid}" data-curcode="${item.curCode}" data-curnameen="${item.curName_EN}" data-curnamevi="${item.curName_VI}" data-description="${item.description}"
-                                                                    data-target="#editModal"
-                                                                    data-toggle="modal"
-                                                                    aria-hidden="true"
+                                                                    onclick="showEditCur(${item.curid})"
                                                                     class="btn text-primary rounded-circle m-0 btn-sm btn-icon"
                                                                     style="height: 0px !important;"><i
                                                                     class="material-icons">edit</i>
@@ -301,6 +298,12 @@
                                                                 theme: "classic"
                                                             });
                                                         });
+                                                        function showAddCurriculum() {
+                                                            window.location.href = '<%= request.getContextPath() %>/add-curriculum';
+                                                        }
+                                                        function showEditCur(id) {
+                                                            window.location.href='<%= request.getContextPath() %>/update-curriculum?id='+id;
+                                                        }
                                                         let currentIndex;
                                                         let oldText;
                                                         $(".sort-handler").click(function (e) {
@@ -373,26 +376,6 @@
                                                                     }
                                                                 }
                                                             }
-                                                        });
-                                                        $('#editModal').on('show.bs.modal', function (event) {
-                                                            var button = $(event.relatedTarget); // Button that triggered the modal
-                                                            var curCode = button.data('curcode'); // Extract value from data-* attributes
-                                                            var curNameEn = button.data('curnameen');
-                                                            var curNameVi = button.data('curnamevi');
-                                                            var description = button.data('description');
-                                                            var id = button.data('id');
-                                                            console.log(id);
-                                                            console.log(curCode);
-                                                            // Set the selected value of the "statusRadio" radio buttons based on the "data-status" attribute
-                                                            $('#updateId').attr('value', id);
-                                                            $('#updateCode').attr('value', curCode);
-                                                            $('#updateCode2').attr('value', curCode);
-                                                            $('#updateNameEn').attr('value', curNameEn);
-                                                            $('#updateNameVi').attr('value', curNameVi);
-                                                            $('#updateDescription').attr('value', description);
-                                                            $('#updateDescription').val(description);
-                                                            $('#updateNameEn').val(curNameEn);
-                                                            $('#updateNameVi').val(curNameVi);
                                                         });
                                                         function search() {
                                                             const searchValue = document.getElementById("textSearch").value;

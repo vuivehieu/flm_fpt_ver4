@@ -6,6 +6,7 @@ package admin.curriculum;
 
 import DAL.AccountDAO;
 import DAL.CurriculumDAO;
+import DAL.DAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
@@ -20,13 +21,20 @@ import model.Curriculum;
  *
  * @author PCM
  */
-@WebServlet(name="CurriculumUpdateController", urlPatterns={"/update-curriculum"})
-public class CurriculumUpdateController extends HttpServlet{
-    
-    
+@WebServlet(name = "CurriculumUpdateController", urlPatterns = {"/update-curriculum"})
+public class CurriculumUpdateController extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.setAttribute("curriculum", new DAO().getCurriculumByCurid(Integer.parseInt(request.getParameter("id"))));
+        request.setAttribute("decisions", new DAO().getAllDecision());
+        request.getRequestDispatcher("gui/admin/curriculum/edit.jsp").forward(request, response);
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
 //        processRequest(request, response);
         CurriculumDAO dao = new CurriculumDAO();
         Curriculum curriculum = new Curriculum();
@@ -42,13 +50,14 @@ public class CurriculumUpdateController extends HttpServlet{
         response.sendRedirect(request.getContextPath() + "/curriculumList");
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
 }

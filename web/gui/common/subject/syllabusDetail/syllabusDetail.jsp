@@ -127,15 +127,6 @@
                                     <div class="col-md-3"></div>
                                 </div>
                                 <div class="cor-p4" style="margin-top: 25px">
-                                    <c:set var="stopLoop" value="false"/>
-                            <c:forEach var="role" items="${account.roles}">
-                                <c:if test="${!stopLoop}">
-                                    <c:if test="${(role.rid == 6) || (role.rid == 5) || (role.rid == 7)}">
-                                        <button class="btn" style="border: 0.2px solid black;float: right;margin-right: 50px" onclick="showEditForm(${syllabus.slbid})">Edit Syllabus</button>
-                                        <c:set var="stopLoop" value="true"/>
-                                    </c:if>
-                                </c:if>
-                            </c:forEach>
                                     <div class="con-title">
                                 <h2>${subject.subjectName_EN} - <span> ${subject.subjectCode}</span></h2>
                                 <p>${subject.subjectName_VI}</p>

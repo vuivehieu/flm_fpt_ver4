@@ -135,6 +135,18 @@
 
                                 </div>
                             </div>
+                            <div class="form-group col-md-12">
+                                <label for="inputSubjectCode" class="ml-2" style="font-size: 15px; color:black">Subject Code</label>
+                                <div class="input-group">
+                                    <select class="form-control js-basic-example2" id="inputSubjectCode" name="inputSubjectCode">
+                                        <option value="none">NONE</option>
+                                        <c:forEach items="${subjects}" var="subject">
+                                            <option value="${subject.subjectCode}">${subject.subjectName_EN} - ${subject.subjectName_VI}</option>
+                                        </c:forEach>
+                                            </select>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer" style="margin: 0 auto; display: flex; justify-content: center; padding: 20px" >

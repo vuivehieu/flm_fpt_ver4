@@ -87,6 +87,7 @@ public class EditSyllabusController extends HttpServlet {
         boolean check = false;
         Syllabus syllabus = new Syllabus();
         int id = Integer.parseInt(request.getParameter("inputId"));
+        Syllabus oldSyl = new DAO().getSyllabusBySlbID(id);
         String nameEn = request.getParameter("inputNameEn");
         String nameVi = request.getParameter("inputNameVi");
         String nameEnOld = request.getParameter("inputNameEnOld");
@@ -118,6 +119,7 @@ public class EditSyllabusController extends HttpServlet {
             syllabus.setDescription(description);
             syllabus.setStudentTask(task);
             syllabus.setSlbName_EN(nameEn);
+            syllabus.setSubjectCode(oldSyl.getSubjectCode());
             syllabus.setDecision(new Decision(decision, null, null, null, null, null, null));
             syllabus.setSlbName_VI(nameVi);
             syllabus.setTimeAllocation(timeAllocation);
@@ -127,7 +129,8 @@ public class EditSyllabusController extends HttpServlet {
             syllabusDAO.update(syllabus);
             Syllabus syllabusA = new DAO().getSyllabusBySlbID(id);
             request.setAttribute("syllabus", syllabus);
-            request.getRequestDispatcher("gui/common/subject/syllabus.jsp").forward(request, response);
+
+            response.sendRedirect(request.getContextPath() + "/search?type=syllabus&keysearch=&filter=subjectcode");
         }
     }
 
