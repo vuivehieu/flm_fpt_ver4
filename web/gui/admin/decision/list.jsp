@@ -24,6 +24,11 @@
     </head>
 
     <body>
+                <% if (request.getParameter("message") != null) { %>
+        <script>
+            alert("<%= request.getParameter("message") %>");
+        </script>
+        <% } %>
         <div class="app-admin-wrap-layout-1 sidebar-full sidebar-theme-slate">
             <!--== MAIN CONTRAINER ==-->
             <jsp:include page="../common/heading/heading.jsp"/>
@@ -102,7 +107,7 @@
                                                         <td>${item.decisionName}</td>
                                                         <td>${item.note}</td>
                                                         <td>
-                                                            ${item.approvedDate}
+                                                            <fmt:formatDate pattern="dd/MM/yyyy" value="${item.approvedDate}" />                                                           
                                                         </td>
 
                                                         <td>

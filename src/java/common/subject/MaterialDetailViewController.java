@@ -1,31 +1,25 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package admin.setting;
 
-import DAL.AccountDAO;
-import DAL.DecisionDAO;
-import DAL.PLODAO;
-import DAL.RoleDAO;
+package common.subject;
+
+import DAL.DAO;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URLEncoder;
-import model.Decision;
-import model.PLO;
-import model.PaginationModel;
 
 /**
  *
- * @author ADMIN
+ * @author phanh
  */
-@WebServlet(name="DecisionAddController", urlPatterns={"/decision-add"})
-public class DecisionAddController extends HttpServlet {
+@WebServlet(name="MaterialDetailViewController", urlPatterns={"/materialDetailView"})
+public class MaterialDetailViewController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -42,10 +36,10 @@ public class DecisionAddController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdminAllUserController</title>");  
+            out.println("<title>Servlet SyllabusDetailController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AdminAllUserController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet SyllabusDetailController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,7 +56,21 @@ public class DecisionAddController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("gui/admin/decision/add.jsp").forward(request, response);
+        DAO dao = new DAO();
+        
+        String subjectCode = request.getParameter("subjectCode");
+        String slbid_raw = request.getParameter("slbid");
+        
+        try {
+            int slbid = Integer.parseInt(slbid_raw);
+            
+            request.setAttribute("list", dao.getMaterialBySlbID(slbid));
+            request.setAttribute("subjectCode", subjectCode);
+            request.setAttribute("slbid", slbid);
+        } catch (NumberFormatException e) {
+            System.out.println("MaterialDetailViewController -> get()" + e);
+        }
+        request.getRequestDispatcher("gui/common/subject/syllabusDetail/materialDetail.jsp").forward(request, response);
     } 
 
     /** 
@@ -75,26 +83,7 @@ public class DecisionAddController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        boolean status = false;
-        DecisionDAO decisionDAO = new DecisionDAO();  
-        Decision decision = new Decision();
-        String decNo = request.getParameter("inputDecisionNo");
-        if(decisionDAO.checkExits(decNo)){
-            request.setAttribute("errorMessage", "Decision No already exist!!!");
-            request.getRequestDispatcher("gui/admin/decision/add.jsp").forward(request, response);
-        }else{
-        String name = request.getParameter("inputDecisionName");
-        String note = request.getParameter("inputNote");
-        if(request.getParameter("inputStatus")!=null){
-            status = Integer.parseInt(request.getParameter("inputStatus"))==1;
-        }
-        decision.setDecisionName(name);
-        decision.setDecisionNo(decNo);
-        decision.setIsActive(status);
-        decision.setNote(note);
-        decisionDAO.add(decision);
-        response.sendRedirect(request.getContextPath() + "/admin-decisions?message="+URLEncoder.encode("Add new decision successfully","UTF-8")); 
-        }    
+        processRequest(request, response);
     }
 
     /** 

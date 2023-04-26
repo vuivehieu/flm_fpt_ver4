@@ -99,7 +99,7 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control mt-2" id="inputDecisionNo" placeholder="Input Decision No" value="${decision.decisionNo}" disabled name="inputDecisionNoFake" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
                                     <input type="text" class="form-control mt-2" id="inputDecisionNo2" placeholder="Input Decision No" value="${decision.decisionNo}" name="oldNo" aria-describedby="inputGroupPrepend" required style="font-size: 14px;display: none">
-                                    <input type="text" class="form-control mt-2" id="inputDecisionNo2" placeholder="Input Decision No" value="${decision.approvedDate}" name="approveDate" aria-describedby="inputGroupPrepend" required style="font-size: 14px;display: none">
+                                    <input type="text" class="form-control mt-2" id="inputDecisionNo2" placeholder="Input Decision No" value="${decision.approvedDate}" name="approveDate" aria-describedby="inputGroupPrepend" style="font-size: 14px;display: none">
                                 </div>
                             </div>
                             <div class="form-group col-md-12">
@@ -112,7 +112,7 @@
                             <div class="form-group col-md-12">
                                 <label for="inputNameVi" class="ml-2" style="font-size: 15px; color:black">Note</label>
                                 <div class="input-group">
-                                    <textarea type="text" cols="2" class="form-control mt-2" id="inputNote" placeholder="Input Note" value="${decision.note}" name="inputNote" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">${decision.note}</textarea>
+                                    <textarea type="text" cols="2" class="form-control mt-2" id="inputNote" placeholder="Input Note" value="${decision.note}" name="inputNote" aria-describedby="inputGroupPrepend" required style="font-size: 14px;heigth:150px;">${decision.note}</textarea>
 
                                 </div>
                             </div>

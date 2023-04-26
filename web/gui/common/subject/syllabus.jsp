@@ -90,6 +90,97 @@
             <div class="container com-sp">
                 <div class="row">
                     <div class="cor ">
+                        <div class="col-md-12">
+                            <div class="cor-con-mid">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <p style="font-weight: bold">Curriculum Detail</p>
+                                        <h2>${curCode}</h2>
+                                    </div>
+                                    <div class="col-md-6" style="display: flex;
+                                         justify-content: center; margin-left: 45px">
+                                        <ul>
+                                            <li><a href="curriculumDetails?curid=${curid}" style="color: black;margin-right: 2px">Overview</a></li>
+                                            <li><a href="poDetailView?id=${curid}" style="color: black;margin-right: 2px">POs</a></li>
+                                            <li><a href="ploDetailView?id=${curid}" class="active" style="color: black;font-weight: bold;margin-right: 2px">PLOs</a></li>
+                                            <li><a href="ploDetailView?id=${curid}" style="color: black;margin-right: 2px">PLO-POs</a></li>
+                                            <li><a href="subjectDetailView?id=${curid}" style="color: black;margin-right: 2px">Subjects</a></li>
+                                            <li><a href="subjectDetailView?id=${curid}" style="color: black;margin-right: 2px">Subject-PLOs</a></li>
+                                            <li><a href="comboDetailView?id=${curid}" style="color: black;margin-right: 2px">Combos</a></li>
+                                            <li><a href="electiveDetailView?id=${curid}" style="color: black;margin-right: 2px">Electives</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-3"></div>
+                                </div>
+                                <c:set var="stopLoop" value="false"/>
+                                <c:forEach var="role" items="${account.roles}">
+                                    <c:if test="${!stopLoop}">
+                                        <c:if test="${(role.rid == 6) || (role.rid == 5) || (role.rid == 7)}">
+                                            <button class="btn" style="border: 0.2px solid black;float: right;margin-right: 20px;margin-bottom: 20px" onclick="showAddPlo(${curid})">Add New PLO</button>
+                                            <c:set var="stopLoop" value="true"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:forEach>
+                                <div class="cor-p4" style="margin-top: 25px">
+                                    <div class="table-responsive" style="margin-top: 30px;" id="root">
+                                        <table class="table table-bordered cart_summary">
+                                            <thead>
+                                                <tr style="background-color: rgb(185, 182, 182);">
+                                                    <th style="vertical-align: middle;">No</th>
+                                                    <th style="vertical-align: middle;">PLO Name</th>
+                                                    <th style="vertical-align: middle;">PLO Description</th>
+                                                        <c:set var="stopLoop2" value="false"/>
+                                                        <c:forEach var="role" items="${account.roles}">
+                                                            <c:if test="${!stopLoop2}">
+                                                                <c:if test="${(role.rid == 6) || (role.rid == 5) || (role.rid == 7)}">
+                                                                <th style="vertical-align: middle;width: 5%">Status</th>
+                                                                <th style="vertical-align: middle;width: 5%">Action</th>
+                                                                    <c:set var="stopLoop2" value="true"/>
+                                                                </c:if>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:set var="index" value="${start + 1}"/>
+                                                <c:forEach items="${list}" var="item">
+                                                    <tr>
+                                                        <td>${index}</td>
+                                                        <td>
+                                                            <p>${item.ploName}</p>
+                                                        </td>
+                                                        <td>
+                                                            <p>
+                                                                ${item.ploDescription}
+                                                            </p>
+                                                        </td>
+                                                        <c:set var="stopLoop3" value="false"/>
+                                                        <c:forEach var="role" items="${account.roles}">
+                                                            <c:if test="${!stopLoop3}">
+                                                                <c:if test="${(role.rid == 6) || (role.rid == 5) || (role.rid == 7)}">
+                                                                    <td>
+                                                                        <c:if test="${item.isActive}">
+                                                                            <span class="badge badge-success">Active</span>
+                                                                        </c:if>
+                                                                        <c:if test="${!item.isActive}">
+                                                                            <span class="badge badge-danger">Inactive</span>
+                                                                        </c:if>
+                                                                    </td>
+                                                                    <td style="vertical-align: middle;"><button class="btn" style="border: 0.2px solid black;float: right;" onclick="showEditPlo(${item.ploid}, ${curid})">Edit</button></td>
+                                                                    <c:set var="stopLoop3" value="true"/>
+                                                                </c:if>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </tr>                       
+                                                    <c:set var="index" value="${index + 1}"/>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                         <div class="ed-about-tit">
                             <div class="con-title">
                                 <h2>${subject.subjectName_EN} - <span> ${subject.subjectCode}</span></h2>

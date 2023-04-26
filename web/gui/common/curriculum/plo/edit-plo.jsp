@@ -105,7 +105,7 @@
                             <div class="form-group col-md-12">
                                 <label for="inputDescription" class="ml-2" style="font-size: 15px; color:black">Description</label>
                                 <div class="input-group">
-                                    <textarea type="text" col="2" class="form-control mt-2" rows="10" cols="70" id="inputDescription" placeholder="Input Description" value="${plo.ploDescription}" name="inputDescription" aria-describedby="inputGroupPrepend" required style="font-size: 15px;">${plo.ploDescription}</textarea>
+                                    <textarea type="text" col="2" class="mt-2" rows="8" cols="70" id="inputDescription" placeholder="Input Description" value="${plo.ploDescription}" name="inputDescription" aria-describedby="inputGroupPrepend" required style="font-size: 15px;resize: none;width: 100%">${plo.ploDescription}</textarea>
 
                                 </div>
                             </div>

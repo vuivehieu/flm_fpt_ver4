@@ -75,7 +75,7 @@ public class SyllabusDetailViewController extends HttpServlet {
         }
         
         
-        request.getRequestDispatcher("gui/common/subject/syllabus.jsp").forward(request, response);
+        request.getRequestDispatcher("gui/common/subject/syllabusDetail/syllabusDetail.jsp").forward(request, response);
     } 
 
     /** 

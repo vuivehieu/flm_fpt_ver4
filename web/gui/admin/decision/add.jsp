@@ -75,9 +75,7 @@
             }
         </style>
     </head>
-
     <body>
-
         <jsp:include page="../common/heading/heading.jsp"/>
 
         <!--Start Content-->
@@ -110,7 +108,7 @@
                             <div class="form-group col-md-12">
                                 <label for="inputNameVi" class="ml-2" style="font-size: 15px; color:black">Note</label>
                                 <div class="input-group">
-                                    <textarea type="text" cols="2" class="form-control mt-2" id="inputNote" placeholder="Input Note" value="" name="inputNote" aria-describedby="inputGroupPrepend" required style="font-size: 14px;"></textarea>
+                                    <textarea type="text" cols="2" class="form-control mt-2" id="inputNote" placeholder="Input Note" value="" name="inputNote" aria-describedby="inputGroupPrepend" required style="font-size: 14px;height: 150px !important;"></textarea>
 
                                 </div>
                             </div>
@@ -125,7 +123,7 @@
                                         <div class="form-group col-md-6">
                                             <div class="input-group">
 
-                                                <input type="radio" value="1" class="ml-2 mr-2 radio" id="inputStatus1" name="inputStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
+                                                <input type="radio" value="1" class="ml-2 mr-2 radio" id="inputStatus1" name="inputStatus" style="font-size: 2px;" checked="checked" aria-describedby="inputGroupPrepend">
                                                 <label for="inputStatus1" class="" style="font-size: 15px">Active</label>
 
                                                 <input type="radio" value="0" class="ml-2 mr-2 radio" id="inputStatus2" name="inputStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">

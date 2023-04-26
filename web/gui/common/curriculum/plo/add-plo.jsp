@@ -103,7 +103,7 @@
                             <div class="form-group col-md-12">
                                 <label for="inputDescription" class="ml-2" style="font-size: 15px; color:black">Description</label>
                                 <div class="input-group">
-                                    <textarea type="text" col="2" class="form-control mt-2" rows="10" cols="70" id="inputDescription" placeholder="Input Description" value="" name="inputDescription" aria-describedby="inputGroupPrepend" required style="font-size: 15px;resize: none;"></textarea>
+                                    <textarea type="text" class="mt-2" rows="8" cols="70" id="inputDescription" placeholder="Input Description" value="" name="inputDescription" aria-describedby="inputGroupPrepend" required style="width: 100%;font-size: 15px;resize:none"></textarea>
 
                                 </div>
                             </div>
@@ -117,7 +117,7 @@
                                         <div class="form-group col-md-6">
                                             <div class="input-group">
 
-                                                <input type="radio" value="1" class="ml-2 mr-2 radio" id="inputStatus1" name="inputStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
+                                                <input type="radio" value="1" class="ml-2 mr-2 radio" id="inputStatus1" name="inputStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend" checked="checked">
                                                 <label for="inputStatus1" class="" style="font-size: 15px">Active</label>
 
                                                 <input type="radio" value="0" class="ml-2 mr-2 radio" id="inputStatus2" name="inputStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
