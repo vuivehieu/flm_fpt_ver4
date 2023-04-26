@@ -54,13 +54,17 @@ public class CurriculumDAO extends DBContext {
                     + "SET\n"
                     + "`curName_EN` = ?,\n"
                     + "`curName_VI` = ?,\n"
-                    + "`description` = ?\n"
+                    + "`description` = ?,\n"
+                    + "`decisionNo` = ?,\n"
+                    + "`isApproved` =?\n"
                     + "WHERE `curid` = ?;";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, curriculum.getCurName_EN());
             ps.setString(2, curriculum.getCurName_VI());
             ps.setString(3, curriculum.getDescription());
-            ps.setInt(4, curriculum.getCurid());
+            ps.setString(4, curriculum.getDecision().getDecisionNo());
+            ps.setBoolean(5, curriculum.isIsApproved());
+            ps.setInt(6,curriculum.getCurid());
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println("CurriculumDAO -> UpdateCurriculum(): " + e);
@@ -387,6 +391,26 @@ public class CurriculumDAO extends DBContext {
             System.out.println("CurriculumDAO -> getAllComboByCurriculumID(): " + e);
         }
         return electives;
+    }
+    
+    public boolean checkNo(String curCode) {
+        boolean check = false;
+        try {
+
+            String sql = "Select Count(*) as count from curriculum where curCode = ?;";
+
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, curCode);
+
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                check = rs.getInt("count") > 0;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("DecisionDAO -> add(): " + e);
+        }
+        return check;
     }
 
 }

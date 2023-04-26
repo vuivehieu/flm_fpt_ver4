@@ -36,7 +36,7 @@
                                     <li class="breadcrumb-home"><a href="#"> <i class="material-icons"
                                                                                 >home</i></a></li>
                                     <li class="breadcrumb-item"><a href="#">FLM</a></li>
-                                    <li class="breadcrumb-item active"><a href="#">Add Curriculum</a></li>
+                                    <li class="breadcrumb-item active"><a href="#">Update Curriculum</a></li>
                                 </ol>
                             </nav>
                         </div>
@@ -78,13 +78,14 @@
                                                         <div class="form-group col-md-12">
                                                             <label for="updateDescription" class="ml-2" style="font-size: 15px; color:black">Description</label>
                                                             <div class="input-group">
-                                                                <textarea type="text" col="2" class="form-control mt-2" rows="10" cols="70" id="updateDescription" placeholder="Input Description" value="" name="updateDescription" aria-describedby="inputGroupPrepend" required style="font-size: 15px;resize: none;">{curriculum.description}</textarea>
+                                                                <textarea type="text" col="2" class="form-control mt-2" rows="8" cols="50" id="updateDescription" placeholder="Input Description" value="" name="updateDescription" aria-describedby="inputGroupPrepend" required style="font-size: 15px;height: 150px;">${curriculum.description}</textarea>
 
                                                             </div>
                                                         </div>
                                                         <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Decision No</label>
                                                         <div class="form-group col-md-12">
                                                             <select class="js-example-basic-single form-control" style="width:100%" name="inputDecision">
+                                                                <option value="none">NONE</option>
                                                                 <c:forEach items="${decisions}" var="decision">
                                                                     <c:if test="${curriculum.decision!=null}">
                                                                         <option value="${decision.decisionNo}" ${curriculum.decision.decisionNo == decision.decisionNo? 'selected':''}><c:out value="${decision.decisionName}"/></option>
@@ -124,7 +125,11 @@
                                                                         <script src="admin-template/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
                                                                         <script src="admin-template/js/pages/datatables/basicDatatable.min.js"></script>
                                                                         <script type="text/javascript">
-                                                                            </body>
+                                                                            $(document).ready(function () {
+                                                                                $('.js-example-basic-single').select2();
+                                                                            });
+                                                                        </script>
+                                                                        </body>
 
-                                                                            </html>
+                                                                        </html>
 

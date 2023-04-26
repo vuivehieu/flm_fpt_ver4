@@ -38,6 +38,7 @@
                                         <a class="mx-3" href="admin-settings" style="font-size: 15px;"><span style="font-weight: bolder;color: black;">System Settings</span></a>
                                         <a href="#" style="font-size: 15px;"><span style="font-weight: bolder;color: black;">Role Permission</span></a>
                                         <a class="mx-3" href="#" style="font-size: 15px;"><span style="font-weight: bolder;color: black;">Decision Management</span></a>
+                                        <a  href="curriculumList" style="font-size: 15px;"><span style="font-weight: bolder;color: black;">Curriculum Management</span></a>
                                     </c:if>
                                 </c:forEach>
                                 
